@@ -1,0 +1,39 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_type.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: elbenkri <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/12/16 07:43:17 by elbenkri          #+#    #+#             */
+/*   Updated: 2017/12/16 09:36:36 by elbenkri         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "ft_printf.h"
+
+void	ft_type(t_var *var, char c)
+{
+	if (c == 'c')
+		var->type = TYPE_CHAR;
+	else if (c == 'd')
+		var->type = TYPE_SHORT;
+	else if (c == 'i')
+		var->type = TYPE_INT;
+	else if (c == 's')
+		var->type = TYPE_STRING;
+	else if (c == 'x')
+		var->type = TYPE_HEXA;
+	else if (c == 'X')
+		var->type = TYPE_HEXA_MAJ;
+	else if (c == 'p')
+		var->type = TYPE_ADDRESS;
+	else if (c == 'o')
+		var->type = TYPE_OCTAL;
+	else if (c == 'O')
+		var->type = TYPE_OCTAL_MAJ;
+	else if (c == 'u')
+		var->type = TYPE_UNSIGNED;
+	else if (c == 'U')
+		var->type = TYPE_UNSIGNED_MAJ;
+}
