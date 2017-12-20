@@ -6,15 +6,22 @@
 /*   By: elbenkri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 16:45:10 by elbenkri          #+#    #+#             */
-/*   Updated: 2017/12/13 16:53:39 by elbenkri         ###   ########.fr       */
+/*   Updated: 2017/12/20 19:39:42 by elbenkri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int		ft_is_number(int nb)
+int		ft_is_number(long long nb)
 {
 	int		i;
 
 	i = 0;
+	if (nb == 0)
+		return (1);
+	else if (nb < 0)
+	{
+		i++;
+		nb *= -1;
+	}
 	while (nb > 0)
 	{
 		nb /= 10;

@@ -6,7 +6,7 @@
 /*   By: elbenkri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/16 07:45:16 by elbenkri          #+#    #+#             */
-/*   Updated: 2017/12/16 09:37:12 by elbenkri         ###   ########.fr       */
+/*   Updated: 2017/12/19 19:23:13 by elbenkri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,10 @@ int		ft_stock_flags(char *str, t_var *var)
 		if (str[i] == var->flags_conv[j])
 		{
 			ft_type(var, var->flags_conv[j]);
-			return (0);
+			return (i + 1);
 		}
 		j = 0;
 		var->flags_stock[var->i_stock++] = str[i++];
 	}
-	return (1);
+	return (0);
 }

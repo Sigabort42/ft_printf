@@ -6,7 +6,7 @@
 /*   By: elbenkri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/16 07:43:17 by elbenkri          #+#    #+#             */
-/*   Updated: 2017/12/16 09:36:36 by elbenkri         ###   ########.fr       */
+/*   Updated: 2017/12/19 18:53:11 by elbenkri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,4 +36,6 @@ void	ft_type(t_var *var, char c)
 		var->type = TYPE_UNSIGNED;
 	else if (c == 'U')
 		var->type = TYPE_UNSIGNED_MAJ;
+	else if (c == '%')
+		var->type = TYPE_MODULO;
 }

@@ -6,7 +6,7 @@
 /*   By: elbenkri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/10 17:33:04 by elbenkri          #+#    #+#             */
-/*   Updated: 2017/12/16 10:01:37 by elbenkri         ###   ########.fr       */
+/*   Updated: 2017/12/20 19:17:22 by elbenkri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,19 @@
 # include <stdarg.h>
 #include <stdio.h>
 
-typedef union	u_var_nb
+typedef union		u_var_nb
 {
-	char		c;
-	short		sh;
-	int			i;
-	double		d;
-	float		f;
-	char		str[8];
-	long		l;
-	void		*ptr;
-}				t_uvar_nb;
+	char			c;
+	short			sh;
+	unsigned int	u_i;
+	int				i;
+	double			d;
+	float			f;
+	char			str[8];
+	long			l;
+	long long		ll;
+	void			*ptr;
+}					t_uvar_nb;
 
 enum
 {
@@ -44,7 +46,9 @@ enum
 	TYPE_ADDRESS,
 	TYPE_STRING,
 	TYPE_WSTRING,
+	TYPE_MODULO,
 	TYPE_LONG,
+	TYPE_LONG_LONG,
 	TYPE_DOUBLE,
 	TYPE_FLOAT,
 };
@@ -54,7 +58,7 @@ typedef struct	s_var
 	char		*res;
 	char		buf[2000];
 	char		flags_stock[100];
-	char		flags_conv[15];// = "cCdDioOuUxXpsS";
+	char		flags_conv[15];
 	int			ret;
 	int			i_buf;
 	int			i_stock;
@@ -62,10 +66,13 @@ typedef struct	s_var
 	int			type;
 }				t_var;
 
-int		ft_is_number(int nb);
+int		ft_printf(const char *format, ...);
+int		ft_is_number(long long nb);
 char	*ft_itoa_base(int value, int base);
 void	ft_type(t_var *var, char c);
 int		ft_stock_flags(char *str, t_var *var);
-int		ft_printf(const char *format, ...);
+void	ft_stock_ap(va_list ap, t_var *var);
+char	*ft_lltoa(long long n);
+void	ft_print_buffer(t_var *var);
 
 #endif
