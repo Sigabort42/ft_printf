@@ -6,7 +6,7 @@
 /*   By: elbenkri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/20 19:12:01 by elbenkri          #+#    #+#             */
-/*   Updated: 2017/12/20 19:35:34 by elbenkri         ###   ########.fr       */
+/*   Updated: 2017/12/21 14:37:40 by elbenkri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	ft_print_buffer(t_var *var)
 	}
 	else
 	{
-		if (var->nb.i == -2147483648)
+		if (var->nb.i >= -2147483648 && var->nb.i < 0)
 		{
 			ft_strcat(var->buf, ft_lltoa(var->nb.i));
 			var->i_buf += ft_is_number(var->nb.i);

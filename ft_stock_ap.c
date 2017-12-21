@@ -6,7 +6,7 @@
 /*   By: elbenkri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/19 18:16:39 by elbenkri          #+#    #+#             */
-/*   Updated: 2017/12/20 19:34:29 by elbenkri         ###   ########.fr       */
+/*   Updated: 2017/12/21 14:41:03 by elbenkri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,9 @@ void	ft_stock_ap(va_list ap, t_var *var)
 	else if (var->type == TYPE_WCHAR)
 		var->nb.c = va_arg(ap, int);
 	else if (var->type == TYPE_SHORT)
-		var->nb.sh = va_arg(ap, int);
+		var->nb.i = va_arg(ap, int);
 	else if (var->type == TYPE_SHORT_MAJ)
-		var->nb.sh = va_arg(ap, int);
+		var->nb.i = va_arg(ap, int);
 	else if (var->type == TYPE_INT)
 		var->nb.i = va_arg(ap, int);
 	else if (var->type == TYPE_OCTAL)
