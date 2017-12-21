@@ -6,7 +6,7 @@
 /*   By: elbenkri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/10 17:33:04 by elbenkri          #+#    #+#             */
-/*   Updated: 2017/12/20 19:17:22 by elbenkri         ###   ########.fr       */
+/*   Updated: 2017/12/21 15:29:30 by elbenkri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ typedef struct	s_var
 {
 	char		*res;
 	char		buf[2000];
+	char		buf_tmp[1000];
 	char		flags_stock[100];
 	char		flags_conv[15];
 	int			ret;
@@ -74,5 +75,6 @@ int		ft_stock_flags(char *str, t_var *var);
 void	ft_stock_ap(va_list ap, t_var *var);
 char	*ft_lltoa(long long n);
 void	ft_print_buffer(t_var *var);
+int		ft_flags(t_var *var, char *flags);
 
 #endif
