@@ -83,6 +83,6 @@ int		ft_stock_flags(char *str, t_var *var);
 void	ft_stock_ap(va_list ap, t_var *var);
 char	*ft_lltoa(long long n);
 void	ft_print_buffer(t_var *var);
-int		ft_flags(t_var *var, char *flags);
+int		ft_flags(char *flags);
 
 #endif

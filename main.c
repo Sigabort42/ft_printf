@@ -14,7 +14,7 @@
 
 int		main()
 {
-	printf("%d\n", ft_printf("salut toi comment %x %s %0+- #10.54d\n", 6500000000000, 0, -2));
-	printf("%d\n", printf("salut toi comment %li %s %d\n", 6500000000000, 0, -2));
-	return (0);
+  printf("%d\n", ft_printf("salut toi comment %x %s %10.15d\n", 6500000000000, 0, -2));
+  printf("%d\n", printf("salut toi comment %li %s %10.15d\n", 6500000000000, 0, -2));
+  return (0);
 }

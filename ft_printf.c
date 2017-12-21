@@ -38,7 +38,7 @@ int		ft_printf(const char *format, ...)
 		if (ft_strlen(var.flags_stock) == 0)
 			break;
 		ft_stock_ap(ap, &var);
-		(!ft_flags(&var, &var.flags_stock[1])) ? ft_print_buffer(&var) : ft_putstr("oulouloulou\n\n\n");;
+		(!ft_flags(&var.flags_stock[1])) ? ft_print_buffer(&var) : ft_putstr("oulouloulou\n\n\n");
 		ft_bzero(var.nb.str, 8);
 		printf("ret :%d|res :%s|buf :%s|stock :%s|type :%d|test i :%d\n", var.ret, var.res, var.buf, var.flags_stock, var.type, var.nb.i);
 		ft_bzero(var.flags_stock, 100);
