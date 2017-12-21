@@ -6,7 +6,7 @@
 /*   By: elbenkri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/10 17:33:04 by elbenkri          #+#    #+#             */
-/*   Updated: 2017/12/21 15:29:30 by elbenkri         ###   ########.fr       */
+/*   Updated: 2017/12/21 16:04:18 by elbenkri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,14 @@ typedef struct	s_var
 	t_uvar_nb	nb;
 	int			type;
 }				t_var;
+
+typedef struct	s_flags
+{
+	char		c;
+	int			largeur;
+	int			precision;
+	char		m;
+}				t_flags;
 
 int		ft_printf(const char *format, ...);
 int		ft_is_number(long long nb);
