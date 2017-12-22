@@ -6,7 +6,7 @@
 #    By: elbenkri <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/12/10 17:33:59 by elbenkri          #+#    #+#              #
-#    Updated: 2017/12/21 15:29:09 by elbenkri         ###   ########.fr        #
+#    Updated: 2017/12/22 16:39:15 by elbenkri         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -29,6 +29,7 @@ SRCS	=	ft_is_number.c \
 			ft_lltoa.c \
 			ft_print_buffer.c \
 			ft_flags.c \
+			ft_print_flags_buffer.c \
 
 OBJS	=	$(SRCS:.c=.o)
 
