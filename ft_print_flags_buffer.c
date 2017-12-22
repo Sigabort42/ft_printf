@@ -6,7 +6,7 @@
 /*   By: elbenkri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/22 16:14:24 by elbenkri          #+#    #+#             */
-/*   Updated: 2017/12/22 18:10:34 by elbenkri         ###   ########.fr       */
+/*   Updated: 2017/12/22 19:41:59 by elbenkri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,37 +18,14 @@ static void	ft_flags_precision(t_var *var, t_flags *s_flags)
 	int		i;
 
 	i = 0;
-	if (s_flags->largeur > s_flags->precision)
-	{
-		var->i_buf_tmp = (s_flags->c & (1 << 2)) ?
-			0 : s_flags->largeur - s_flags->precision;
-		ft_memcpy(&var->buf_tmp[var->i_buf_tmp], var->res, s_flags->precision);
-		if (!var->i_buf_tmp)
-		{
-			i = s_flags->precision;
-			var->i_buf_tmp = s_flags->largeur;
-		}
-		while (i < var->i_buf_tmp)
-		{
-			if ((!(s_flags->c & (1 << 2))) && (s_flags->c & (1 << 0)))
-				var->buf_tmp[i++] = '0';
-			else
-				var->buf_tmp[i++] = ' ';
-		}
-		i = 0;
-		while (i < var->i_buf_tmp)
-			var->buf[var->i_buf++] = var->buf_tmp[i++];
-		printf("lilililili :%s\n", var->buf_tmp);
-	}
-}
-
-static void	ft_flags_largeur(t_var *var, t_flags *s_flags, int i)
-{
-	var->i_buf_tmp = (s_flags->c & (1 << 2)) ? 0 : s_flags->largeur;
-	ft_memcpy(&var->buf_tmp[var->i_buf_tmp], var->res, ft_strlen(var->res) + 1);
+	var->i_buf_tmp = (s_flags->c & (1 << 2)) ?
+		0 : s_flags->largeur - s_flags->precision;
+	ft_memcpy(&var->buf_tmp[var->i_buf_tmp], var->res, s_flags->precision =
+(s_flags->precision == 0) ? ft_strlen(var->res) :
+s_flags->precision);
 	if (!var->i_buf_tmp)
 	{
-		i = ft_strlen(var->res);
+		i = s_flags->precision;
 		var->i_buf_tmp = s_flags->largeur;
 	}
 	while (i < var->i_buf_tmp)
@@ -59,13 +36,35 @@ static void	ft_flags_largeur(t_var *var, t_flags *s_flags, int i)
 			var->buf_tmp[i++] = ' ';
 	}
 	i = 0;
+	while (i < (int)ft_strlen(var->buf_tmp))
+		var->buf[var->i_buf++] = var->buf_tmp[i++];
+	printf("lililililimnmnmnm :%s\n", var->buf_tmp);
+}
+
+static void	ft_flags_largeur(t_var *var, t_flags *s_flags, int i)
+{
+	if (s_flags->precision >= (int)ft_strlen(var->res))
+		var->i_buf_tmp = (s_flags->c & (1 << 2)) ? 0 :
+			s_flags->largeur - ft_strlen(var->res);
+	else
+		var->i_buf_tmp = (s_flags->c & (1 << 2)) ? 0 : s_flags->largeur;
+	ft_memcpy(&var->buf_tmp[var->i_buf_tmp], var->res, ft_strlen(var->res) + 1);
+	if (!var->i_buf_tmp)
+	{
+		i = ft_strlen(var->res);
+		var->i_buf_tmp = s_flags->largeur;
+	}
+	printf("lililililijhdkjsh :%s\n", var->buf_tmp);
 	while (i < var->i_buf_tmp)
 	{
-		if ((s_flags->c & (1 << 2)))
-			var->buf[var->i_buf++] = var->buf_tmp[i++];
+		if ((!(s_flags->c & (1 << 2))) && (s_flags->c & (1 << 0)))
+			var->buf_tmp[i++] = '0';
 		else
-			var->buf[var->i_buf++] = var->buf_tmp[++i];
+			var->buf_tmp[i++] = ' ';
 	}
+	i = 0;
+	while (i < (int)ft_strlen(var->buf_tmp))
+		var->buf[var->i_buf++] = var->buf_tmp[i++];
 	printf("lilililili :%s\n", var->buf_tmp);
 }
 

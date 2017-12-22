@@ -6,7 +6,7 @@
 /*   By: elbenkri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/21 14:47:50 by elbenkri          #+#    #+#             */
-/*   Updated: 2017/12/22 16:24:26 by elbenkri         ###   ########.fr       */
+/*   Updated: 2017/12/22 19:30:09 by elbenkri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int				ft_flags(char *flags, t_flags *s_flags)
 	i = 0;
 	if (flags[0] == 0)
 		return (0);
-	while (flags[i] && (!(flags[i] >= '1' && flags[i] <= '9')))
+	while (flags[i] && (!(flags[i] >= '1' && flags[i] <= '9')) && flags[i] != '.')
 	{
 		if (flags[i] == '0')
 			s_flags->c = s_flags->c | (1 << 0);
