@@ -20,6 +20,8 @@ int		main()
 
 	nb.i = -12;
 	ft_bzero(nb.str, 8);
-	printf("%d\n", nb.sh);
+	nb.l = 9223372036854775807;
+	nb.ll = 18446744073709551615;
+	printf("%llu\n", nb.ll);
 	return (0);
 }

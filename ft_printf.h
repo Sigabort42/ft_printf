@@ -26,7 +26,7 @@ typedef union		u_var_nb
 	float			f;
 	char			str[8];
 	long			l;
-	long long		ll;
+	unsigned long long		ll;
 	void			*ptr;
 }					t_uvar_nb;
 
@@ -79,10 +79,14 @@ typedef struct	s_flags
 int		ft_printf(const char *format, ...);
 int		ft_is_number(long long nb);
 char	*ft_itoa_base(int value, int base);
+char	*ft_ltoa_base(long value, int base);
+char	*ft_lltoa_base(unsigned long long value, int base);
 void	ft_type(t_var *var, char c);
 int		ft_stock_flags(char *str, t_var *var);
 void	ft_stock_ap(va_list ap, t_var *var);
-char	*ft_lltoa(long long n);
+char	*ft_itoa(int n);
+char	*ft_ltoa(long n);
+char	*ft_lltoa(unsigned long long n);
 void	ft_print_buffer(t_var *var);
 int		ft_flags(char *flags, t_flags *s_flags);
 int		ft_print_flags_buffer(t_var *var, t_flags *s_flags);

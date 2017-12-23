@@ -22,10 +22,14 @@ HEADER	=	ft_printf.h
 
 SRCS	=	ft_is_number.c \
 			ft_itoa_base.c \
+			ft_ltoa_base.c \
+			ft_lltoa_base.c \
 			ft_stock_flags.c \
 			ft_type.c \
 			ft_printf.c \
 			ft_stock_ap.c \
+			ft_itoa.c \
+			ft_ltoa.c \
 			ft_lltoa.c \
 			ft_print_buffer.c \
 			ft_flags.c \

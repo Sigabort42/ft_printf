@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_itoa_base.c                                     :+:      :+:    :+:   */
+/*   ft_lltoa_base.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: elbenkri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,7 +12,7 @@
 
 #include "ft_printf.h"
 
-static int		ft_count(int value, int base)
+static int		ft_count(unsigned long long value, int base)
 {
 	int		i;
 
@@ -25,16 +25,13 @@ static int		ft_count(int value, int base)
 	return (i);
 }
 
-char			*ft_itoa_base(int value, int base)
+char			*ft_lltoa_base(unsigned long long value, int base)
 {
 	char		*res =  NULL;
 	int		i;
-	int		flg;
 
 	if (base == 10)
-	  return (ft_itoa(value));
-	flg = (value < 0) ? 1 : 0;
-	value *= (flg == 1) ? -1 : 1;
+	  return (ft_lltoa(value));
 	i = ft_count(value, base);
 	res = (char*)malloc(sizeof(char) * i);
 	res[i] = 0;
@@ -43,6 +40,5 @@ char			*ft_itoa_base(int value, int base)
 		res[i] = value % base + ((value % base > 9) ? 'A' - 10 : '0');
 		value /= base;
 	}
-	res[i] = (flg == 1) ? '-' : res[i];
 	return (res);
 }

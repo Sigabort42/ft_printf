@@ -14,9 +14,10 @@
 
 int		main()
 {
-//	printf("%d\n", ft_printf("%7.6s\n", "0"));
-//	printf("%d\n", printf("%7.6s\n", "0"));
-	printf("%d\n", ft_printf("salut toi comment %x %s %d %10.5s lol\n", 6500000000000, 0, -2, "0"));
-	printf("%d\n", printf("salut toi comment %li %s %d %10.5s lol\n", 6500000000000, 0, -2, "0"));
+  //	printf("%d\n", ft_printf("%7.6s\n", "0"));
+	printf("%d\n", printf("%llx\n", -18446744073709551614));
+	printf("%s\n", ft_lltoa_base(-18446744073709551614, 16));
+	//	printf("%d\n", ft_printf("salut toi comment %x %s %d %10.5s lol\n", 6500000000000, 0, -2, "0"));
+//	printf("%d\n", printf("salut toi comment %li %s %d %10.5s lol\n", 6500000000000, 0, -2, "0"));
 	return (0);
 }

@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_itoa.c                                          :+:      :+:    :+:   */
+/*   ft_lltoa.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: elbenkri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -13,7 +13,7 @@
 #include "libft/libft.h"
 #include "ft_printf.h"
 
-static int	ft_count(long long cpy)
+static int	ft_count(unsigned long long cpy)
 {
 	int		i;
 
@@ -27,7 +27,7 @@ static int	ft_count(long long cpy)
 	return (i);
 }
 
-static char	*ft_print(char *str, long long n, int *i)
+static char	*ft_print(char *str, unsigned long long n, int *i)
 {
 	while (n > 0)
 	{
@@ -38,20 +38,13 @@ static char	*ft_print(char *str, long long n, int *i)
 	return (str);
 }
 
-static char	*ft_lol(void)
-{
-	return (ft_strdup("-2147483648"));
-}
-
-char		*ft_lltoa(long long n)
+char		*ft_lltoa(unsigned long long n)
 {
 	int				i;
 	long long		cpy;
 	int				flg;
 	char			*str;
 
-	if (n == -2147483648)
-		return (str = ft_lol());
 	i = 0;
 	flg = ABS(n);
 	n = (flg == 0) ? n : n * -1;

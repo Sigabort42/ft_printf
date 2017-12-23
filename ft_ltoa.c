@@ -1,18 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_itoa.c                                          :+:      :+:    :+:   */
+/*   ft_ltoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: elbenkri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/12 06:40:59 by elbenkri          #+#    #+#             */
-/*   Updated: 2017/11/12 09:18:39 by elbenkri         ###   ########.fr       */
+/*   Updated: 2017/12/19 20:29:31 by elbenkri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft/libft.h"
+#include "ft_printf.h"
 
-static int	ft_count(int cpy)
+static int	ft_count(long cpy)
 {
 	int		i;
 
@@ -26,7 +27,7 @@ static int	ft_count(int cpy)
 	return (i);
 }
 
-static char	*ft_print(char *str, int n, int *i)
+static char	*ft_print(char *str, long n, int *i)
 {
 	while (n > 0)
 	{
@@ -39,17 +40,17 @@ static char	*ft_print(char *str, int n, int *i)
 
 static char	*ft_lol(void)
 {
-	return (ft_strdup("-2147483648"));
+	return (ft_strdup("-9223372036854775807"));
 }
 
-char		*ft_itoa(int n)
+char		*ft_ltoa(long int n)
 {
-	int		i;
-	int		cpy;
-	int		flg;
-	char	*str;
+	int				i;
+	long			cpy;
+	int				flg;
+	char			*str;
 
-	if (n == -2147483648)
+	if (n == -9223372036854775807)
 		return (str = ft_lol());
 	i = 0;
 	flg = ABS(n);
