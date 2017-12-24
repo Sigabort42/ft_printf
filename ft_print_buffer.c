@@ -30,15 +30,20 @@ void	ft_print_buffer(t_var *var)
 	}
 	else
 	{
-		if (var->nb.i >= -2147483648 && var->nb.i < 0)
+		if (var->type == TYPE_LONG_LONG)
 		{
-			ft_strcat(var->buf, ft_lltoa(var->nb.i));
+			ft_strcat(var->buf, ft_lltoa(var->nb.ll));
+			var->i_buf += ft_is_number_u_long_long(var->nb.ll);
+		}
+		else if (var->nb.l >= -2147483648 && var->nb.i <= 0)
+		{
+			ft_strcat(var->buf, ft_itoa(var->nb.i));
 			var->i_buf += ft_is_number(var->nb.i);
 		}
 		else
 		{
-			ft_strcat(var->buf, ft_lltoa(var->nb.ll));
-			var->i_buf += ft_is_number(var->nb.ll);
+			ft_strcat(var->buf, ft_ltoa(var->nb.l));
+			var->i_buf += ft_is_number(var->nb.l);
 		}
 	}
 }

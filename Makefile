@@ -21,6 +21,7 @@ CFLAGS	=	-Wall -Wextra -Werror
 HEADER	=	ft_printf.h
 
 SRCS	=	ft_is_number.c \
+			ft_is_number_u_long_long.c \
 			ft_itoa_base.c \
 			ft_ltoa_base.c \
 			ft_lltoa_base.c \

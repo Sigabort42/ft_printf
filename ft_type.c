@@ -18,6 +18,8 @@ void	ft_type(t_var *var, char c)
 		var->type = TYPE_CHAR;
 	else if (c == 'd')
 		var->type = TYPE_SHORT;
+	else if (c == 'D')
+		var->type = TYPE_LONG_LONG;
 	else if (c == 'i')
 		var->type = TYPE_INT;
 	else if (c == 's')

@@ -42,7 +42,7 @@ int		ft_printf(const char *format, ...)
 		ft_stock_ap(ap, &var);
 		(!ft_flags(&var.flags_stock[1], &s_flags)) ? ft_print_buffer(&var) : ft_print_flags_buffer(&var, &s_flags);
 		ft_bzero(var.nb.str, 8);
-		printf("ret :%d|res :%s|buf :%s|stock :%s|type :%d|test i :%d\n", var.ret, var.res, var.buf, var.flags_stock, var.type, var.nb.i);
+	printf("ret :%d|i_buf:%d|res :%s|buf :%s|stock :%s|type :%d|test i :%d\n", var.ret, var.i_buf, var.res, var.buf, var.flags_stock, var.type, var.nb.i);
 		ft_bzero(var.flags_stock, 100);
 	}
 	ft_putstr("res :");

@@ -78,6 +78,7 @@ typedef struct	s_flags
 
 int		ft_printf(const char *format, ...);
 int		ft_is_number(long long nb);
+int		ft_is_number_u_long_long(unsigned long long nb);
 char	*ft_itoa_base(int value, int base);
 char	*ft_ltoa_base(long value, int base);
 char	*ft_lltoa_base(unsigned long long value, int base);

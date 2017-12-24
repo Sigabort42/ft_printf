@@ -17,7 +17,7 @@
 static void	ft_stock_ap2(va_list ap, t_var *var)
 {
 	if (var->type == TYPE_ADDRESS)
-		var->nb.ll = va_arg(ap, long long);
+		var->nb.l = va_arg(ap, long);
 	else if (var->type == TYPE_STRING)
 		var->res = va_arg(ap, char *);
 	else if (var->type == TYPE_WSTRING)
@@ -27,7 +27,7 @@ static void	ft_stock_ap2(va_list ap, t_var *var)
 	else if (var->type == TYPE_LONG)
 		var->nb.l = va_arg(ap, long);
 	else if (var->type == TYPE_LONG_LONG)
-		var->nb.ll = va_arg(ap, long long);
+		var->nb.ll = va_arg(ap, unsigned long long);
 	else if (var->type == TYPE_DOUBLE)
 		var->nb.d = va_arg(ap, double);
 	else if (var->type == TYPE_FLOAT)
@@ -47,19 +47,19 @@ void	ft_stock_ap(va_list ap, t_var *var)
 	else if (var->type == TYPE_INT)
 		var->nb.i = va_arg(ap, int);
 	else if (var->type == TYPE_OCTAL)
-		var->nb.ll = va_arg(ap, long long);
+		var->nb.l = va_arg(ap, long);
 	else if (var->type == TYPE_OCTAL_MAJ)
-		var->nb.ll = va_arg(ap, long long);
+		var->nb.l = va_arg(ap, long);
 	else if (var->type == TYPE_UNSIGNED)
-		var->nb.ll = va_arg(ap, long long);
+		var->nb.l = va_arg(ap, long);
 	else if (var->type == TYPE_UNSIGNED_MAJ)
-		var->nb.ll = va_arg(ap, long long);
+		var->nb.l = va_arg(ap, long);
 	else if (var->type == TYPE_UNSIGNED_MAJ)
-		var->nb.ll = va_arg(ap, long long);
+		var->nb.l = va_arg(ap, long);
 	else if (var->type == TYPE_HEXA)
-		var->nb.ll = va_arg(ap, long long);
+		var->nb.l = va_arg(ap, long);
 	else if (var->type == TYPE_HEXA_MAJ)
-		var->nb.ll = va_arg(ap, long long);
+		var->nb.l = va_arg(ap, long);
 	else
 		ft_stock_ap2(ap, var);
 }
