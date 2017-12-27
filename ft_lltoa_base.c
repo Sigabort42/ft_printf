@@ -37,7 +37,7 @@ char			*ft_lltoa_base(unsigned long long value, int base)
 	res[i] = 0;
 	while (i-- > 0)
 	{
-		res[i] = value % base + ((value % base > 9) ? 'A' - 10 : '0');
+		res[i] = value % base + ((value % base > 9) ? 'a' - 10 : '0');
 		value /= base;
 	}
 	return (res);

@@ -16,7 +16,8 @@
 int	main()
 {
 //	char	*ok = "salut";
-	printf("salut|%10.15s\n", "salut toi");
+//	printf("salut|%10.15d\n", "salut toi");
+	printf("salut|%1.13d\n", 42);
 //	printf("salut|%hhd\n", 107);
 //	printf("salut|%010% dsajhdak %d\n", 107);
 //	printf("0x10%s\n", ft_itoa_base(174849, 16));

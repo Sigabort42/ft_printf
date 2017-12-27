@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_ltoa_base.c                                     :+:      :+:    :+:   */
+/*   ft_ltoa_base_maj.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: elbenkri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -25,7 +25,7 @@ static int		ft_count(long value, int base)
 	return (i);
 }
 
-char			*ft_ltoa_base(long value, int base)
+char			*ft_ltoa_base_maj(long value, int base)
 {
 	char		*res =  NULL;
 	int		i;
@@ -40,7 +40,7 @@ char			*ft_ltoa_base(long value, int base)
 	res[i] = 0;
 	while (i-- > 0)
 	{
-		res[i] = value % base + ((value % base > 9) ? 'a' - 10 : '0');
+		res[i] = value % base + ((value % base > 9) ? 'A' - 10 : '0');
 		value /= base;
 	}
 	res[i] = (flg == 1) ? '-' : res[i];

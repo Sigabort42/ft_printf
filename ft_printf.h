@@ -20,7 +20,7 @@ typedef union		u_var_nb
 {
 	char			c;
 	short			sh;
-	unsigned int	u_i;
+	unsigned long	u_l;
 	int				i;
 	double			d;
 	float			f;
@@ -37,10 +37,10 @@ enum
 	TYPE_SHORT,
 	TYPE_SHORT_MAJ,
 	TYPE_INT,
-	TYPE_OCTAL,
-	TYPE_OCTAL_MAJ,
 	TYPE_UNSIGNED,
 	TYPE_UNSIGNED_MAJ,
+	TYPE_OCTAL,
+	TYPE_OCTAL_MAJ,
 	TYPE_HEXA,
 	TYPE_HEXA_MAJ,
 	TYPE_ADDRESS,
@@ -49,8 +49,6 @@ enum
 	TYPE_MODULO,
 	TYPE_LONG,
 	TYPE_LONG_LONG,
-	TYPE_DOUBLE,
-	TYPE_FLOAT,
 };
 
 typedef struct	s_var
@@ -76,12 +74,15 @@ typedef struct	s_flags
 	char		m;
 }				t_flags;
 
+void		ft_print_bit(int c);
 int		ft_printf(const char *format, ...);
 int		ft_is_number(long long nb);
 int		ft_is_number_u_long_long(unsigned long long nb);
 char	*ft_itoa_base(int value, int base);
 char	*ft_ltoa_base(long value, int base);
+char	*ft_ltoa_base_maj(long value, int base);
 char	*ft_lltoa_base(unsigned long long value, int base);
+char	*ft_lltoa_base_maj(unsigned long long value, int base);
 void	ft_type(t_var *var, char c);
 int		ft_stock_flags(char *str, t_var *var);
 void	ft_stock_ap(va_list ap, t_var *var);

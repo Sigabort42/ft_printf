@@ -13,7 +13,6 @@
 #include "libft/libft.h"
 #include "ft_printf.h"
 
-
 static void	ft_stock_ap2(va_list ap, t_var *var)
 {
 	if (var->type == TYPE_ADDRESS)
@@ -28,10 +27,6 @@ static void	ft_stock_ap2(va_list ap, t_var *var)
 		var->nb.l = va_arg(ap, long);
 	else if (var->type == TYPE_LONG_LONG)
 		var->nb.ll = va_arg(ap, unsigned long long);
-	else if (var->type == TYPE_DOUBLE)
-		var->nb.d = va_arg(ap, double);
-	else if (var->type == TYPE_FLOAT)
-		var->nb.f = va_arg(ap, double);
 }
 
 void	ft_stock_ap(va_list ap, t_var *var)
@@ -51,11 +46,9 @@ void	ft_stock_ap(va_list ap, t_var *var)
 	else if (var->type == TYPE_OCTAL_MAJ)
 		var->nb.l = va_arg(ap, long);
 	else if (var->type == TYPE_UNSIGNED)
-		var->nb.l = va_arg(ap, long);
+		var->nb.u_l = va_arg(ap, unsigned long);
 	else if (var->type == TYPE_UNSIGNED_MAJ)
-		var->nb.l = va_arg(ap, long);
-	else if (var->type == TYPE_UNSIGNED_MAJ)
-		var->nb.l = va_arg(ap, long);
+		var->nb.u_l = va_arg(ap, unsigned long);
 	else if (var->type == TYPE_HEXA)
 		var->nb.l = va_arg(ap, long);
 	else if (var->type == TYPE_HEXA_MAJ)
