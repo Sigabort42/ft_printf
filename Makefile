@@ -23,10 +23,13 @@ HEADER	=	ft_printf.h
 SRCS	=	ft_is_number.c \
 			ft_is_number_u_long_long.c \
 			ft_itoa_base.c \
+			ft_itoa_base_maj.c \
 			ft_ltoa_base.c \
 			ft_ltoa_base_maj.c \
 			ft_lltoa_base.c \
 			ft_lltoa_base_maj.c \
+			ft_ui_maxtoa_base.c \
+			ft_ui_maxtoa_base_maj.c \
 			ft_stock_flags.c \
 			ft_type.c \
 			ft_printf.c \
@@ -34,9 +37,11 @@ SRCS	=	ft_is_number.c \
 			ft_itoa.c \
 			ft_ltoa.c \
 			ft_lltoa.c \
+			ft_ui_maxtoa.c \
 			ft_print_buffer.c \
 			ft_flags.c \
 			ft_print_flags_buffer.c \
+			ft_flags_stock.c \
 
 OBJS	=	$(SRCS:.c=.o)
 

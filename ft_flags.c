@@ -31,7 +31,7 @@ static void		ft_verif_modificateur(char *mod, t_flags *s_flags)
 	if (!ft_strcmp(mod, "hh"))
 		s_flags->m = s_flags->m | (1 << 0);
 	if (!ft_strcmp(mod, "h"))
-		s_flags->c = s_flags->c | (1 << 1);
+		s_flags->m = s_flags->m | (1 << 1);
 	if (!ft_strcmp(mod, "l"))
 		s_flags->m = s_flags->m | (1 << 2);
 	if (!ft_strcmp(mod, "ll"))
@@ -63,6 +63,7 @@ int				ft_flags(char *flags, t_flags *s_flags)
 	i = 0;
 	if (flags[0] == 0)
 		return (0);
+	s_flags->c = 0;
 	while (flags[i] && (!(flags[i] >= '1' && flags[i] <= '9')) && flags[i] != '.' && ft_verif_mod(flags[i]))
 	{
 		if (flags[i] == '0')

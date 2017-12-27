@@ -14,8 +14,8 @@
 
 int		main()
 {
-	printf("%d\n", ft_printf("%#15llx\n", 0));//44073709551615));
-	printf("%d\n", printf("%#15llx\n", 0));//44073709551615));
+	printf("%d\n", ft_printf("%#15.10ju\n", 7777777777777777777777777));//44073709551615));
+	printf("%d\n", printf("%#15.10ju\n", 7777777777777777777777777));//44073709551615));
 	//	printf("%d\n", ft_printf("salut toi comment %o %D %s %d %10.5s lol\n", 6500000000000, 18446744073709551615, 0, -2, "0"));
 	//	printf("%d\n", printf("salut toi comment %o %D %s %d %10.5s lol\n", 6500000000000, 18446744073709551615, 0, -2, "0"));
 	return (0);

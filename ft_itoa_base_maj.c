@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_itoa_base.c                                     :+:      :+:    :+:   */
+/*   ft_itoa_base_maj.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: elbenkri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -25,7 +25,7 @@ static int		ft_count(int value, int base)
 	return (i);
 }
 
-char			*ft_itoa_base(int value, int base)
+char			*ft_itoa_base_maj(int value, int base)
 {
 	char		*res =  NULL;
 	int		i;
@@ -40,7 +40,7 @@ char			*ft_itoa_base(int value, int base)
 	res[i] = 0;
 	while (i-- > 0)
 	{
-		res[i] = value % base + ((value % base > 9) ? 'a' - 10 : '0');
+		res[i] = value % base + ((value % base > 9) ? 'A' - 10 : '0');
 		value /= base;
 	}
 	res[i] = (flg == 1) ? '-' : res[i];
