@@ -6,10 +6,11 @@
 /*   By: elbenkri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/14 12:45:52 by elbenkri          #+#    #+#             */
-/*   Updated: 2017/12/22 16:14:11 by elbenkri         ###   ########.fr       */
+/*   Updated: 2017/12/28 13:30:28 by elbenkri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft/libft.h"
 #include "ft_printf.h"
 
 static int		ft_count(int value, int base)
@@ -27,14 +28,13 @@ static int		ft_count(int value, int base)
 
 char			*ft_itoa_base(int value, int base)
 {
-	char		*res =  NULL;
-	int		i;
-	int		flg;
+	char		*res;
+	int			i;
 
+	res = NULL;
 	if (base == 10)
-	  return (ft_itoa(value));
-	flg = (value < 0) ? 1 : 0;
-	value *= (flg == 1) ? -1 : 1;
+		return (ft_itoa(value));
+	value = (value < 0) ? (unsigned int)value : value;
 	i = ft_count(value, base);
 	res = (char*)malloc(sizeof(char) * i);
 	res[i] = 0;
@@ -43,6 +43,5 @@ char			*ft_itoa_base(int value, int base)
 		res[i] = value % base + ((value % base > 9) ? 'a' - 10 : '0');
 		value /= base;
 	}
-	res[i] = (flg == 1) ? '-' : res[i];
 	return (res);
 }

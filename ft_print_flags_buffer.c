@@ -6,7 +6,7 @@
 /*   By: elbenkri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/22 16:14:24 by elbenkri          #+#    #+#             */
-/*   Updated: 2017/12/22 22:16:42 by elbenkri         ###   ########.fr       */
+/*   Updated: 2017/12/28 13:11:42 by elbenkri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,9 +72,13 @@ static void	ft_flags_largeur(t_var *var, t_flags *s_flags, int i)
 
 int			ft_print_flags_buffer(t_var *var, t_flags *s_flags)
 {
-	if (var->type == TYPE_STRING)
+	if (var->type == TYPE_STRING || var->type == TYPE_CHAR || var->type == TYPE_MODULO)
 	{
 		var->i_buf_tmp = 0;
+		if (var->type == TYPE_CHAR)
+			var->res = ft_strdup(&var->nb.c);
+		else if (var->type == TYPE_MODULO)
+			var->res = ft_strdup("%");
 		if (var->res)
 		{
 			if (s_flags->precision < (int)ft_strlen(var->res))
@@ -87,8 +91,13 @@ int			ft_print_flags_buffer(t_var *var, t_flags *s_flags)
 	}
 	else
 	{
-	  printf("ouloulou :%llu %d %d\n", var->nb.ll, var->type, TYPE_OCTAL);
-		if ((s_flags->m & (1 << 3)))
+		if (var->type == TYPE_ADDRESS)
+		{
+			ft_memcpy(&var->buf[var->i_buf], "0x", 2);
+			var->i_buf += 2;
+			ft_flags_stock(var, s_flags, ft_ltoa_base(var->nb.l, 16));
+		}
+		else if ((s_flags->m & (1 << 3)))
 		{
 			if (var->type == TYPE_HEXA)
 				ft_flags_stock(var, s_flags, ft_lltoa_base(var->nb.ll, 16));
@@ -96,68 +105,86 @@ int			ft_print_flags_buffer(t_var *var, t_flags *s_flags)
 				ft_flags_stock(var, s_flags, ft_lltoa_base_maj(var->nb.ll, 16));
 			else if (var->type == TYPE_OCTAL)
 				ft_flags_stock(var, s_flags, ft_lltoa_base(var->nb.ll, 8));
+			else if (var->type == TYPE_OCTAL_MAJ)
+				ft_flags_stock(var, s_flags, ft_ltoa_base(var->nb.ll, 8));
 			else
 				ft_flags_stock(var, s_flags, ft_lltoa(var->nb.ll));
 		}
 		else if ((s_flags->m & (1 << 0)))
 		{
-		  printf("alalalal:%d\n", var->nb.u_c);
 			if (var->type == TYPE_HEXA)
 				ft_flags_stock(var, s_flags, ft_itoa_base(var->nb.u_c, 16));
 			else if (var->type == TYPE_HEXA_MAJ)
 				ft_flags_stock(var, s_flags, ft_itoa_base_maj(var->nb.u_c, 16));
 			else if (var->type == TYPE_OCTAL)
 				ft_flags_stock(var, s_flags, ft_itoa_base(var->nb.u_c, 8));
+			else if (var->type == TYPE_OCTAL_MAJ)
+				ft_flags_stock(var, s_flags, ft_ltoa_base(var->nb.u_l, 8));
 			else
 				ft_flags_stock(var, s_flags, ft_itoa(var->nb.u_c));
 		}
 		else if ((s_flags->m & (1 << 1)))
 		{
-		  printf("alalalal:%d\n", var->nb.u_sh);
 			if (var->type == TYPE_HEXA)
 				ft_flags_stock(var, s_flags, ft_itoa_base(var->nb.u_sh, 16));
 			else if (var->type == TYPE_HEXA_MAJ)
 				ft_flags_stock(var, s_flags, ft_itoa_base_maj(var->nb.u_sh, 16));
 			else if (var->type == TYPE_OCTAL)
 				ft_flags_stock(var, s_flags, ft_itoa_base(var->nb.u_sh, 8));
+			else if (var->type == TYPE_OCTAL_MAJ)
+				ft_flags_stock(var, s_flags, ft_ltoa_base(var->nb.u_l, 8));
 			else
 				ft_flags_stock(var, s_flags, ft_itoa(var->nb.u_sh));
 		}
 		else if ((s_flags->m & (1 << 2)))
 		{
-		  printf("alalalal:%d\n", var->nb.u_i);
 			if (var->type == TYPE_HEXA)
-				ft_flags_stock(var, s_flags, ft_ltoa_base(var->nb.u_i, 16));
+				ft_flags_stock(var, s_flags, ft_ltoa_base(var->nb.l, 16));
 			else if (var->type == TYPE_HEXA_MAJ)
-				ft_flags_stock(var, s_flags, ft_ltoa_base_maj(var->nb.u_i, 16));
+				ft_flags_stock(var, s_flags, ft_ltoa_base_maj(var->nb.l, 16));
 			else if (var->type == TYPE_OCTAL)
-				ft_flags_stock(var, s_flags, ft_ltoa_base(var->nb.u_i, 8));
+				ft_flags_stock(var, s_flags, ft_ltoa_base(var->nb.l, 8));
+			else if (var->type == TYPE_OCTAL_MAJ)
+				ft_flags_stock(var, s_flags, ft_ltoa_base(var->nb.u_l, 8));
 			else
-				ft_flags_stock(var, s_flags, ft_ltoa(var->nb.u_i));
+				ft_flags_stock(var, s_flags, ft_ltoa(var->nb.u_l));
 		}
 		else if ((s_flags->m & (1 << 4)))
 		{
-		  printf("alalalal pas encore fait:%ju\n", var->nb.ui_max);
 			if (var->type == TYPE_HEXA)
 				ft_flags_stock(var, s_flags, ft_ui_maxtoa_base(var->nb.ui_max, 16));
 			else if (var->type == TYPE_HEXA_MAJ)
 				ft_flags_stock(var, s_flags, ft_ui_maxtoa_base_maj(var->nb.ui_max, 16));
 			else if (var->type == TYPE_OCTAL)
 				ft_flags_stock(var, s_flags, ft_ui_maxtoa_base(var->nb.ui_max, 8));
+			else if (var->type == TYPE_OCTAL_MAJ)
+				ft_flags_stock(var, s_flags, ft_ltoa_base(var->nb.u_l, 8));
 			else
 				ft_flags_stock(var, s_flags, ft_ui_maxtoa(var->nb.ui_max));
 		}
 		else if ((s_flags->m & (1 << 5)))
 		{
-		  printf("alalalal pas encore fait:%d\n", var->nb.u_i);
 			if (var->type == TYPE_HEXA)
 				ft_flags_stock(var, s_flags, ft_ltoa_base(var->nb.u_i, 16));
 			else if (var->type == TYPE_HEXA_MAJ)
 				ft_flags_stock(var, s_flags, ft_ltoa_base_maj(var->nb.u_i, 16));
 			else if (var->type == TYPE_OCTAL)
 				ft_flags_stock(var, s_flags, ft_ltoa_base(var->nb.u_i, 8));
+			else if (var->type == TYPE_OCTAL_MAJ)
+				ft_flags_stock(var, s_flags, ft_ltoa_base(var->nb.u_l, 8));
 			else
 				ft_flags_stock(var, s_flags, ft_ltoa(var->nb.u_i));
+		}
+		else
+		{
+			if (var->type == TYPE_HEXA)
+				ft_flags_stock(var, s_flags, ft_ltoa_base(var->nb.l, 16));
+			else if (var->type == TYPE_HEXA_MAJ)
+				ft_flags_stock(var, s_flags, ft_ltoa_base_maj(var->nb.l, 16));
+			else if (var->type == TYPE_OCTAL || var->type == TYPE_OCTAL_MAJ)
+				ft_flags_stock(var, s_flags, ft_ltoa_base(var->nb.l, 8));
+			else
+				ft_flags_stock(var, s_flags, ft_ltoa(var->nb.l));
 		}
 	}
 	return (1);

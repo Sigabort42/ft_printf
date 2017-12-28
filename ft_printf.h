@@ -6,7 +6,7 @@
 /*   By: elbenkri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/10 17:33:04 by elbenkri          #+#    #+#             */
-/*   Updated: 2017/12/22 16:40:26 by elbenkri         ###   ########.fr       */
+/*   Updated: 2017/12/28 12:26:42 by elbenkri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,6 @@ char	*ft_ui_maxtoa_base_maj(uintmax_t value, int base);
 void	ft_type(t_var *var, char c);
 int		ft_stock_flags(char *str, t_var *var);
 void	ft_stock_ap(va_list ap, t_var *var);
-char	*ft_itoa(int n);
 char	*ft_ltoa(long n);
 char	*ft_lltoa(unsigned long long n);
 char	*ft_ui_maxtoa(uintmax_t n);

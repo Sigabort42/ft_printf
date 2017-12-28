@@ -6,7 +6,7 @@
 /*   By: elbenkri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/15 15:56:55 by elbenkri          #+#    #+#             */
-/*   Updated: 2017/12/22 16:41:15 by elbenkri         ###   ########.fr       */
+/*   Updated: 2017/12/28 16:04:48 by elbenkri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int		ft_printf(const char *format, ...)
 	va_list ap;
 	t_flags	s_flags;
 
-	printf("format :%s\n", format);
+//	printf("format :%s\n", format);
 	va_start(ap, format);
 	var.ret = 0;
 	var.i_buf = 0;
@@ -42,10 +42,10 @@ int		ft_printf(const char *format, ...)
 		ft_stock_ap(ap, &var);
 		(!ft_flags(&var.flags_stock[1], &s_flags)) ? ft_print_buffer(&var) : ft_print_flags_buffer(&var, &s_flags);
 		ft_bzero(var.nb.str, 8);
-		printf("ret :%d|i_buf:%d|res :%s|buf :%s|stock :%s|type :%d|test i :%d\n", var.ret, var.i_buf, var.res, var.buf, var.flags_stock, var.type, var.nb.i);
+//		printf("ret :%d|i_buf:%d|res :%s|buf :%s|stock :%s|type :%d|test i :%d\n", var.ret, var.i_buf, var.res, var.buf, var.flags_stock, var.type, var.nb.i);
 		ft_bzero(var.flags_stock, 100);
 	}
-	ft_putstr("res :");
-	ft_putstr(var.buf);
+//	ft_putstr("res :");
+	ft_putstr_fd(var.buf, 2);
 	return (var.i_buf);
 }

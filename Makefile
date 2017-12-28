@@ -6,7 +6,7 @@
 #    By: elbenkri <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/12/10 17:33:59 by elbenkri          #+#    #+#              #
-#    Updated: 2017/12/22 16:39:15 by elbenkri         ###   ########.fr        #
+#    Updated: 2017/12/28 13:23:56 by elbenkri         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -34,7 +34,6 @@ SRCS	=	ft_is_number.c \
 			ft_type.c \
 			ft_printf.c \
 			ft_stock_ap.c \
-			ft_itoa.c \
 			ft_ltoa.c \
 			ft_lltoa.c \
 			ft_ui_maxtoa.c \
@@ -48,11 +47,11 @@ OBJS	=	$(SRCS:.c=.o)
 all: $(NAME)
 
 $(NAME): $(OBJS)
-
 	ar rc $(NAME_TMP) $(OBJS)
 	make -C	libft/
 	libtool -static -o $(NAME) $(NAME_TMP) libft/libft.a
 	ranlib $(NAME)
+	rm -rf $(NAME_TMP)
 
 clean:
 	make -C libft/ clean

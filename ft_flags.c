@@ -6,7 +6,7 @@
 /*   By: elbenkri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/21 14:47:50 by elbenkri          #+#    #+#             */
-/*   Updated: 2017/12/22 19:30:09 by elbenkri         ###   ########.fr       */
+/*   Updated: 2017/12/28 11:56:59 by elbenkri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,11 +84,11 @@ int				ft_flags(char *flags, t_flags *s_flags)
 	u = ft_is_number(ft_atoi(&flags[i + 1]));
 	i += (flags[i] == '.') ? u : 0;
        	(flags[i - u] == '.') ? ft_verif_modificateur(&flags[i + 1], s_flags) : ft_verif_modificateur(&flags[i], s_flags);
-	ft_putstr("s_flags->c :");
+/*	ft_putstr("s_flags->c :");
 	ft_print_bit(s_flags->c);
 	printf("\ns_flags->largeur :%i", s_flags->largeur);
 	printf("\ns_flags->precision :%i\n", s_flags->precision);
 	ft_putstr("s_flags->m :");
 	ft_print_bit(s_flags->m);
-	return (1);
+*/	return (1);
 }
