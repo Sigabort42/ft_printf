@@ -26,12 +26,13 @@ typedef union		u_var_nb
 	int				i;
 	intmax_t	i_max;
 	uintmax_t	ui_max;
+	size_t		s_i;
+	ssize_t		s_ui;
 	unsigned int	u_i;
-	double			d;
-	float			f;
 	char			str[8];
 	long			l;
 	unsigned long	u_l;
+	long long	ll_i;
 	unsigned long long		ll;
 	void			*ptr;
 }					t_uvar_nb;
@@ -70,6 +71,8 @@ typedef struct	s_var
 	int			i_stock;
 	t_uvar_nb	nb;
 	int			type;
+	int		i_plus;
+	int		i_moins;
 }				t_var;
 
 typedef struct	s_flags
@@ -96,7 +99,10 @@ void	ft_type(t_var *var, char c);
 int		ft_stock_flags(char *str, t_var *var);
 void	ft_stock_ap(va_list ap, t_var *var);
 char	*ft_ltoa(long n);
+char	*ft_stoa(ssize_t n);
 char	*ft_lltoa(unsigned long long n);
+char	*ft_lldtoa(long long n);
+char	*ft_i_maxtoa(intmax_t n);
 char	*ft_ui_maxtoa(uintmax_t n);
 void	ft_print_buffer(t_var *var);
 int		ft_flags(char *flags, t_flags *s_flags);

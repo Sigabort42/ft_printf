@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_ltoa.c                                          :+:      :+:    :+:   */
+/*   ft_i_maxtoa.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: elbenkri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -13,7 +13,7 @@
 #include "libft/libft.h"
 #include "ft_printf.h"
 
-static int	ft_count(long cpy)
+static int	ft_count(intmax_t cpy)
 {
 	int		i;
 
@@ -27,7 +27,7 @@ static int	ft_count(long cpy)
 	return (i);
 }
 
-static char	*ft_print(char *str, long n, int *i)
+static char	*ft_print(char *str, intmax_t n, int *i)
 {
 	while (n > 0)
 	{
@@ -38,20 +38,22 @@ static char	*ft_print(char *str, long n, int *i)
 	return (str);
 }
 
-static char	*ft_lol(void)
+char		*ft_lol()
 {
 	return (ft_strdup("-9223372036854775808"));
 }
 
-char		*ft_ltoa(long int n)
+char		*ft_i_maxtoa(intmax_t n)
 {
 	int				i;
-	long			cpy;
+	intmax_t		cpy;
 	int				flg;
 	char			*str;
 
 	if (n < -9223372036854775807)
+	  {
 		return (str = ft_lol());
+	  }
 	i = 0;
 	flg = ABS(n);
 	n = (flg == 0) ? n : n * -1;

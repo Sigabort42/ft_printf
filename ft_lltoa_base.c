@@ -17,6 +17,8 @@ static int		ft_count(unsigned long long value, int base)
 	int		i;
 
 	i = 0;
+	if (value == 0)
+		return (1);
 	while (value > 0)
 	{
 		i++;

@@ -17,6 +17,8 @@ static int		ft_count(long value, int base)
 	int		i;
 
 	i = 0;
+	if (value == 0)
+		return (1);
 	while (value > 0)
 	{
 		i++;
@@ -27,9 +29,10 @@ static int		ft_count(long value, int base)
 
 char			*ft_ltoa_base(long value, int base)
 {
-	char		*res =  NULL;
+	char		*res;
 	int		i;
 
+	res = NULL;
 	if (base == 10)
 	  return (ft_ltoa(value));
 	value = (value < 0) ? (unsigned long) value : value;

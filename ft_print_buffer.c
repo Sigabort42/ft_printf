@@ -39,12 +39,12 @@ static void	ft_print_buffer3(char *str, t_var *var)
 {
 	if (var->type == TYPE_HEXA || var->type == TYPE_HEXA_MAJ)
 	{
-//		ft_putstr("sallut oti comment tu va ?");
 		if (var->type == TYPE_HEXA)
-			str = ft_ltoa_base(var->nb.l, 16);
+			str = ft_ltoa_base(var->nb.i, 16);
 		else if (var->type == TYPE_HEXA_MAJ)
-			str = ft_ltoa_base_maj(var->nb.l, 16);
-		ft_strcat(var->buf, str);
+			str = ft_ltoa_base_maj(var->nb.i, 16);
+		//		ft_strcat(var->buf, str);
+		ft_memcpy(&var->buf[var->i_buf], str, ft_strlen(str));
 		var->i_buf += ft_strlen(str);
 		free(str);
 	}
@@ -81,9 +81,18 @@ static void	ft_print_buffer2(t_var *var)
 			free(str);
 			return ;
 		}
-		str = ft_ltoa(var->nb.u_l);
-		ft_strcat(var->buf, str);
-		var->i_buf += ft_is_number(var->nb.u_l);
+		else if (var->type == TYPE_UNSIGNED_MAJ)
+		{
+			str = ft_ltoa(var->nb.u_l);
+			ft_strcat(var->buf, str);
+			var->i_buf += ft_is_number(var->nb.u_l);
+		}
+		else
+		{
+			str = ft_ltoa(var->nb.u_i);
+			ft_strcat(var->buf, str);
+			var->i_buf += ft_is_number(var->nb.u_i);
+		}
 		free(str);
 	}
 	else
@@ -92,9 +101,11 @@ static void	ft_print_buffer2(t_var *var)
 
 void		ft_print_buffer(t_var *var)
 {
-	if (var->type == TYPE_STRING)
+	if (var->type == TYPE_STRING || var->type == TYPE_CHAR)
 	{
-		if (var->res == 0)
+		if (var->type == TYPE_CHAR)
+			var->buf[var->i_buf++] = var->nb.c;
+		else if (!var->res)
 		{
 			ft_strcat(var->buf, "(null)");
 			var->i_buf += ft_strlen("(null)");

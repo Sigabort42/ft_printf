@@ -19,7 +19,6 @@ int		ft_printf(const char *format, ...)
 	va_list ap;
 	t_flags	s_flags;
 
-//	printf("format :%s\n", format);
 	va_start(ap, format);
 	var.ret = 0;
 	var.i_buf = 0;
@@ -42,10 +41,9 @@ int		ft_printf(const char *format, ...)
 		ft_stock_ap(ap, &var);
 		(!ft_flags(&var.flags_stock[1], &s_flags)) ? ft_print_buffer(&var) : ft_print_flags_buffer(&var, &s_flags);
 		ft_bzero(var.nb.str, 8);
-//		printf("ret :%d|i_buf:%d|res :%s|buf :%s|stock :%s|type :%d|test i :%d\n", var.ret, var.i_buf, var.res, var.buf, var.flags_stock, var.type, var.nb.i);
 		ft_bzero(var.flags_stock, 100);
 	}
-//	ft_putstr("res :");
-	ft_putstr_fd(var.buf, 2);
+	va_end(ap);
+	write(1, var.buf, var.i_buf);
 	return (var.i_buf);
 }

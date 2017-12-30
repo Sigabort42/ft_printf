@@ -35,7 +35,10 @@ SRCS	=	ft_is_number.c \
 			ft_printf.c \
 			ft_stock_ap.c \
 			ft_ltoa.c \
+			ft_stoa.c \
 			ft_lltoa.c \
+			ft_lldtoa.c \
+			ft_i_maxtoa.c \
 			ft_ui_maxtoa.c \
 			ft_print_buffer.c \
 			ft_flags.c \

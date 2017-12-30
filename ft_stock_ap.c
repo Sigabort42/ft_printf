@@ -36,7 +36,22 @@ void	ft_stock_ap(va_list ap, t_var *var)
 	else if (var->type == TYPE_WCHAR)
 		var->nb.c = va_arg(ap, int);
 	else if (var->type == TYPE_SHORT)
-		var->nb.i = va_arg(ap, int);
+	{
+		if (ft_strchr(var->flags_stock, 'l'))
+			var->nb.l = va_arg(ap, long);
+		else if (ft_strstr(var->flags_stock, "ll"))
+			var->nb.ll_i = va_arg(ap, long long);
+		else if (ft_strchr(var->flags_stock, 'h'))
+			var->nb.sh = va_arg(ap, int);
+		else if (ft_strstr(var->flags_stock, "hh"))
+			var->nb.c = va_arg(ap, int);
+		else if (ft_strchr(var->flags_stock, 'j'))
+			var->nb.i_max = va_arg(ap, intmax_t);
+		else if (ft_strchr(var->flags_stock, 'z'))
+			var->nb.s_ui = va_arg(ap, ssize_t);
+		else
+			var->nb.i = va_arg(ap, int);
+	}
 	else if (var->type == TYPE_SHORT_MAJ)
 		var->nb.i = va_arg(ap, int);
 	else if (var->type == TYPE_INT)

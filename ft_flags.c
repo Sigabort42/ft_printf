@@ -84,11 +84,5 @@ int				ft_flags(char *flags, t_flags *s_flags)
 	u = ft_is_number(ft_atoi(&flags[i + 1]));
 	i += (flags[i] == '.') ? u : 0;
        	(flags[i - u] == '.') ? ft_verif_modificateur(&flags[i + 1], s_flags) : ft_verif_modificateur(&flags[i], s_flags);
-/*	ft_putstr("s_flags->c :");
-	ft_print_bit(s_flags->c);
-	printf("\ns_flags->largeur :%i", s_flags->largeur);
-	printf("\ns_flags->precision :%i\n", s_flags->precision);
-	ft_putstr("s_flags->m :");
-	ft_print_bit(s_flags->m);
-*/	return (1);
+	return (1);
 }
