@@ -41,8 +41,10 @@ static void	ft_flags_precision(t_var *var, t_flags *s_flags, int i)
 	i = 0;
 	while (i < (int)ft_strlen(var->buf_tmp))
 		var->buf[var->i_buf++] = var->buf_tmp[i++];
-	if (var->type == TYPE_CHAR && !var->nb.c)
+	if (var->type == TYPE_CHAR && !var->nb.c && ft_strlen(var->buf_tmp))
 		var->buf[var->i_buf - 1] = var->nb.c;
+	else if (var->type == TYPE_CHAR && !var->nb.c && !ft_strlen(var->buf_tmp))
+		var->buf[var->i_buf++] = var->nb.c;
 }
 
 static void	ft_flags_largeur(t_var *var, t_flags *s_flags, int i)
@@ -70,157 +72,113 @@ static void	ft_flags_largeur(t_var *var, t_flags *s_flags, int i)
 	i = 0;
 	while (i < (int)ft_strlen(var->buf_tmp))
 		var->buf[var->i_buf++] = var->buf_tmp[i++];
+	if (var->type == TYPE_CHAR && !var->nb.c && ft_strlen(var->buf_tmp))
+		var->buf[var->i_buf - 1] = var->nb.c;
+	else if (var->type == TYPE_CHAR && !var->nb.c && !ft_strlen(var->buf_tmp))
+		var->buf[var->i_buf++] = var->nb.c;
 }
 
-int			ft_print_flags_buffer(t_var *var, t_flags *s_flags)
+static void		ft_conv_envoi(va_list ap, t_var *var, t_flags *s_flags, int base)
 {
-	char	tab[] = "(null)";
+  char *str = NULL;
 
-	if (var->type == TYPE_STRING || var->type == TYPE_CHAR || var->type == TYPE_MODULO)
+  if (var->type == TYPE_UNSIGNED_MAJ || var->type == TYPE_SHORT_MAJ || var->type == TYPE_OCTAL_MAJ || var->type == TYPE_BITWISE)
+      ft_flags_stock(var, s_flags, ft_lltoa_base(va_arg(ap, unsigned long), base));
+  else if ((s_flags->m & (1 << 3)))
+    ft_flags_stock(var, s_flags, str = ft_ltoa_base(va_arg(ap, long long), base));
+  else if ((s_flags->m & (1 << 0)))
+    ft_flags_stock(var, s_flags, ft_itoa_base((char)va_arg(ap, int), base));
+  else if ((s_flags->m & (1 << 1)))
+    ft_flags_stock(var, s_flags, ft_itoa_base((short)va_arg(ap, int), base));
+  else if ((s_flags->m & (1 << 2)))
+    ft_flags_stock(var, s_flags, ft_ltoa_base(va_arg(ap, long), base));
+  else if ((s_flags->m & (1 << 4)))
+    ft_flags_stock(var, s_flags, ft_ui_maxtoa_base(va_arg(ap, uintmax_t), base));
+  else if ((s_flags->m & (1 << 5)))
+    ft_flags_stock(var, s_flags, ft_ltoa_base(va_arg(ap, ssize_t), base));
+  else
+    {
+      if (var->type <= TYPE_INT && s_flags->m == 0)
+	ft_flags_stock(var, s_flags, ft_itoa_base(va_arg(ap, int), base));
+      else
+	ft_flags_stock(var, s_flags, ft_lltoa_base(va_arg(ap, unsigned int), base));
+    }
+}
+
+static void		ft_conv_envoi_maj(va_list ap, t_var *var, t_flags *s_flags, int base)
+{
+  if ((s_flags->m & (1 << 3)))
+    ft_flags_stock(var, s_flags, ft_ltoa_base_maj(va_arg(ap, long long), base));
+  else if ((s_flags->m & (1 << 0)))
+    ft_flags_stock(var, s_flags, ft_itoa_base_maj((char)va_arg(ap, int), base));
+  else if ((s_flags->m & (1 << 1)))
+    ft_flags_stock(var, s_flags, ft_itoa_base_maj((short)va_arg(ap, int), base));
+  else if ((s_flags->m & (1 << 2)))
+    ft_flags_stock(var, s_flags, ft_ltoa_base_maj(va_arg(ap, long), base));
+  else if ((s_flags->m & (1 << 4)))
+    ft_flags_stock(var, s_flags, ft_ui_maxtoa_base_maj(va_arg(ap, uintmax_t), base));
+  else if ((s_flags->m & (1 << 5)))
+    ft_flags_stock(var, s_flags, ft_ltoa_base_maj(va_arg(ap, ssize_t), base));
+  else
+    {
+      if (var->type <= TYPE_INT && s_flags->m == 0)
+	ft_flags_stock(var, s_flags, ft_itoa_base_maj(va_arg(ap, int), base));
+      else
+	ft_flags_stock(var, s_flags, ft_lltoa_base_maj(va_arg(ap, unsigned int), base));
+    }
+}
+
+int			ft_print_flags_buffer(va_list ap, t_var *var, t_flags *s_flags)
+{
+  char	tab[] = "(null)";
+
+  var->res = NULL;
+  if (var->type == TYPE_STRING || var->type == TYPE_CHAR || var->type == TYPE_MODULO)
+    {
+      var->i_buf_tmp = 0;
+      if (var->type == TYPE_MODULO)
 	{
-		var->i_buf_tmp = 0;
-		if (var->type == TYPE_MODULO)
-		{
-			var->nb.c = '%';
-			var->res = &var->nb.c;
-		}
-		else if (var->type == TYPE_CHAR && var->nb.c)
-			var->res = &var->nb.c;
-		if (var->res)
-		{
-			if (s_flags->precision < (int)ft_strlen(var->res))
-				ft_flags_precision(var, s_flags, 0);
-			else
-				ft_flags_largeur(var, s_flags, 0);
-		}
-		else
-		  {
-			var->res = (var->type == TYPE_STRING) ? tab : 0;
-			ft_flags_precision(var, s_flags, 0);
-		  }
+	  var->nb.c = '%';
+	  var->res = &var->nb.c;
+	  var->res[1] = 0;
 	}
-	else
+      else if (var->type == TYPE_CHAR)
 	{
-		if (var->type == TYPE_ADDRESS)
-		{
-			ft_memcpy(&var->buf[var->i_buf], "0x", 2);
-			var->i_buf += 2;
-			ft_flags_stock(var, s_flags, ft_ltoa_base(var->nb.l, 16));
-		}
-		else if ((s_flags->m & (1 << 3)))
-		{
-			if (var->type == TYPE_HEXA)
-				ft_flags_stock(var, s_flags, ft_lltoa_base(var->nb.ll, 16));
-			else if (var->type == TYPE_HEXA_MAJ)
-				ft_flags_stock(var, s_flags, ft_lltoa_base_maj(var->nb.ll, 16));
-			else if (var->type == TYPE_OCTAL)
-				ft_flags_stock(var, s_flags, ft_lltoa_base(var->nb.ll, 8));
-			else if (var->type == TYPE_OCTAL_MAJ)
-				ft_flags_stock(var, s_flags, ft_ltoa_base(var->nb.ll, 8));
-			else
-			  {
-			    if (var->type <= TYPE_INT)
-				ft_flags_stock(var, s_flags, ft_lldtoa(var->nb.ll_i));
-			    else
-				ft_flags_stock(var, s_flags, ft_lltoa(var->nb.ll));
-			  }
-		}
-		else if ((s_flags->m & (1 << 0)))
-		{
-			if (var->type == TYPE_HEXA)
-				ft_flags_stock(var, s_flags, ft_itoa_base(var->nb.u_c, 16));
-			else if (var->type == TYPE_HEXA_MAJ)
-				ft_flags_stock(var, s_flags, ft_itoa_base_maj(var->nb.u_c, 16));
-			else if (var->type == TYPE_OCTAL)
-				ft_flags_stock(var, s_flags, ft_itoa_base(var->nb.u_c, 8));
-			else if (var->type == TYPE_OCTAL_MAJ)
-				ft_flags_stock(var, s_flags, ft_ltoa_base(var->nb.u_l, 8));
-			else
-				ft_flags_stock(var, s_flags, ft_itoa(var->nb.c));
-		}
-		else if ((s_flags->m & (1 << 1)))
-		{
-			if (var->type == TYPE_HEXA)
-				ft_flags_stock(var, s_flags, ft_itoa_base(var->nb.u_sh, 16));
-			else if (var->type == TYPE_HEXA_MAJ)
-				ft_flags_stock(var, s_flags, ft_itoa_base_maj(var->nb.u_sh, 16));
-			else if (var->type == TYPE_OCTAL)
-				ft_flags_stock(var, s_flags, ft_itoa_base(var->nb.u_sh, 8));
-			else if (var->type == TYPE_OCTAL_MAJ)
-				ft_flags_stock(var, s_flags, ft_ltoa_base(var->nb.u_l, 8));
-			else
-			  {
-			    if (var->type == TYPE_UNSIGNED || var->type == TYPE_UNSIGNED_MAJ)
-				ft_flags_stock(var, s_flags, ft_ltoa(var->nb.u_l));
-			    else
-				ft_flags_stock(var, s_flags, ft_itoa(var->nb.sh));
-			  }
-		}
-		else if ((s_flags->m & (1 << 2)))
-		{
-			if (var->type == TYPE_HEXA)
-				ft_flags_stock(var, s_flags, ft_ltoa_base(var->nb.l, 16));
-			else if (var->type == TYPE_HEXA_MAJ)
-				ft_flags_stock(var, s_flags, ft_ltoa_base_maj(var->nb.l, 16));
-			else if (var->type == TYPE_OCTAL)
-				ft_flags_stock(var, s_flags, ft_ltoa_base(var->nb.l, 8));
-			else if (var->type == TYPE_OCTAL_MAJ)
-				ft_flags_stock(var, s_flags, ft_ltoa_base(var->nb.u_l, 8));
-			else
-				ft_flags_stock(var, s_flags, ft_ltoa(var->nb.u_l));
-		}
-		else if ((s_flags->m & (1 << 4)))
-		{
-			if (var->type == TYPE_HEXA)
-				ft_flags_stock(var, s_flags, ft_ui_maxtoa_base(var->nb.ui_max, 16));
-			else if (var->type == TYPE_HEXA_MAJ)
-				ft_flags_stock(var, s_flags, ft_ui_maxtoa_base_maj(var->nb.ui_max, 16));
-			else if (var->type == TYPE_OCTAL)
-				ft_flags_stock(var, s_flags, ft_ui_maxtoa_base(var->nb.ui_max, 8));
-			else if (var->type == TYPE_OCTAL_MAJ)
-				ft_flags_stock(var, s_flags, ft_ltoa_base(var->nb.u_l, 8));
-			else
-			{
-				if (var->type <= TYPE_INT)
-					ft_flags_stock(var, s_flags, ft_i_maxtoa(var->nb.i_max));
-				else
-					ft_flags_stock(var, s_flags, ft_ui_maxtoa(var->nb.ui_max));
-			}
-		}
-		else if ((s_flags->m & (1 << 5)))
-		{
-			if (var->type == TYPE_HEXA)
-				ft_flags_stock(var, s_flags, ft_ltoa_base(var->nb.u_i, 16));
-			else if (var->type == TYPE_HEXA_MAJ)
-				ft_flags_stock(var, s_flags, ft_ltoa_base_maj(var->nb.u_i, 16));
-			else if (var->type == TYPE_OCTAL)
-				ft_flags_stock(var, s_flags, ft_ltoa_base(var->nb.u_i, 8));
-			else if (var->type == TYPE_OCTAL_MAJ)
-				ft_flags_stock(var, s_flags, ft_ltoa_base(var->nb.u_l, 8));
-			else
-			  {
-			    if (var->type <= TYPE_INT)
-				ft_flags_stock(var, s_flags, ft_stoa(var->nb.s_ui));
-			    else
-				ft_flags_stock(var, s_flags, ft_ltoa(var->nb.u_i));
-			  }
-		}
-		else
-		{
-			if (var->type == TYPE_HEXA)
-				ft_flags_stock(var, s_flags, ft_ltoa_base(var->nb.l, 16));
-			else if (var->type == TYPE_HEXA_MAJ)
-				ft_flags_stock(var, s_flags, ft_ltoa_base_maj(var->nb.l, 16));
-			else if (var->type == TYPE_OCTAL || var->type == TYPE_OCTAL_MAJ)
-				ft_flags_stock(var, s_flags, ft_ltoa_base(var->nb.l, 8));
-			else
-			  {
-				if (var->type <= TYPE_INT)
-					ft_flags_stock(var, s_flags, ft_itoa(var->nb.i));
-				else
-					ft_flags_stock(var, s_flags, ft_ltoa(var->nb.l));
-			  }
-		}
+	  var->nb.c = va_arg(ap, int);
+	  var->res = &var->nb.c;
+	  var->res[1] = 0;
 	}
-	return (1);
+      else if (var->type == TYPE_STRING)
+	var->res = va_arg(ap, char*);
+      if (var->res)
+	{
+	  if (s_flags->precision < (int)ft_strlen(var->res))
+	    ft_flags_precision(var, s_flags, 0);
+	  else
+	    ft_flags_largeur(var, s_flags, 0);
+	}
+      else
+	{
+	  var->res = (var->type == TYPE_STRING) ? tab : 0;
+	  ft_flags_precision(var, s_flags, 0);
+	}
+    }
+  else
+    {
+      if (var->type == TYPE_ADDRESS)
+	  ft_flags_stock(var, s_flags, ft_lltoa_base(va_arg(ap, unsigned long), 16));
+      else if (var->type == TYPE_HEXA)
+	ft_conv_envoi(ap, var, s_flags, 16);
+      else if (var->type == TYPE_HEXA_MAJ)
+	ft_conv_envoi_maj(ap, var, s_flags, 16);
+      else if (var->type == TYPE_OCTAL)
+	ft_conv_envoi(ap, var, s_flags, 8);
+      else if (var->type == TYPE_OCTAL_MAJ)
+	ft_conv_envoi_maj(ap, var, s_flags, 8);
+      else if (var->type == TYPE_BITWISE)
+	ft_conv_envoi(ap, var, s_flags, 2);
+      else
+	ft_conv_envoi(ap, var, s_flags, 10);
+    }
+  return (1);
 }

@@ -14,10 +14,8 @@
 
 int		main()
 {
-  //	ft_printf("%x\n", 4294967296);
-  //	printf("%x\n", 4294967296);
-  printf("\n%d\n", ft_printf("%%"));
-  printf("\n%d\n", printf("%%"));
+  printf("\n%d\n", ft_printf("%-10s is a string", ""));
+  printf("\n%d\n", printf("%-10s is a string", ""));
  //	printf("%d\n", ft_printf("salut toi comment %o %D %s %d %10.5s lol\n", 6500000000000, 18446744073709551615, 0, -2, "0"));
 //	printf("%d\n", printf("salut toi comment %o %D %s %d %10.5s lol\n", 6500000000000, 18446744073709551615, 0, -2, "0"));
 	return (0);

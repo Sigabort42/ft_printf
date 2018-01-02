@@ -24,7 +24,7 @@ int		ft_printf(const char *format, ...)
 	var.i_buf = 0;
 	s_flags.c = 0;
 	ft_bzero(var.buf, 2000);
-	ft_strcpy(var.flags_conv, "cCdDioOuUxXpsS");
+	ft_strcpy(var.flags_conv, "cCdDioOuUxXpsSb");
 	while (format[var.ret])
 	{
 		while (format[var.ret] && format[var.ret] != '%' && var.i_buf != 2000)
@@ -38,8 +38,7 @@ int		ft_printf(const char *format, ...)
 		var.ret += ft_stock_flags(&((char*)format)[var.ret], &var);
 		if (ft_strlen(var.flags_stock) == 0)
 			break;
-		ft_stock_ap(ap, &var);
-		(!ft_flags(&var.flags_stock[1], &s_flags)) ? ft_print_buffer(&var) : ft_print_flags_buffer(&var, &s_flags);
+		(!ft_flags(&var.flags_stock[1], &s_flags)) ? ft_print_buffer(ap, &var) : ft_print_flags_buffer(ap, &var, &s_flags);
 		ft_bzero(var.nb.str, 8);
 		ft_bzero(var.flags_stock, 100);
 	}

@@ -40,4 +40,8 @@ void	ft_type(t_var *var, char c)
 		var->type = TYPE_UNSIGNED_MAJ;
 	else if (c == '%')
 		var->type = TYPE_MODULO;
+	else if (c == 'b')
+		var->type = TYPE_BITWISE;
+	else if (c == 'S')
+		var->type = TYPE_WSTRING;
 }
