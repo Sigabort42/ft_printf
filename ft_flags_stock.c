@@ -18,7 +18,7 @@ static int		ft_stock_buf_base(t_var *var, t_flags *s_flags, int res_strcmp, int 
 	int	i;
 
 	i = 0;
-	if (!res_strcmp && len_str_hexa == 1 && s_flags->m == 0 && s_flags->c >= 1 && s_flags->c <= 16 && (!var->i_buf || (var->type == TYPE_OCTAL || var->type == TYPE_OCTAL_MAJ)))
+	if (!res_strcmp && len_str_hexa == 1 && s_flags->m == 0 && s_flags->c >= 2 && s_flags->c <= 16 && (!var->i_buf || (var->type >= TYPE_OCTAL && var->type <= TYPE_OCTAL_MAJ)))
 	  {
 		if (var->i_plus)
 		  var->buf[var->i_buf++] = '+';
@@ -90,10 +90,12 @@ static void	ft_flags_stock5(t_var *var, t_flags *s_flags, char *str_hexa)
     }
   else
     {
-      if(s_flags->largeur >= s_flags->precision + var->len_str_hexa && var->res_strcmp && var->type != TYPE_BITWISE)
-	var->k = s_flags->largeur - s_flags->precision - var->len_str_hexa;
+      if (var->type == TYPE_ADDRESS)
+	var->k = s_flags->largeur - var->len_str_hexa - 2;
       else if (s_flags->precision < var->len_str_hexa && var->res_strcmp)
 	var->k = s_flags->largeur - var->len_str_hexa;
+      else if((s_flags->largeur >= s_flags->precision + var->len_str_hexa && var->res_strcmp && var->type != TYPE_BITWISE) || s_flags->precision >= var->len_str_hexa)
+	var->k = s_flags->largeur - s_flags->precision - var->len_str_hexa;
       else
 	var->k = s_flags->largeur - s_flags->precision;
       ft_memset(&var->buf_tmp[var->i_buf_tmp], ' ', var->k);
@@ -122,7 +124,7 @@ static void	ft_flags_stock4(t_var *var, t_flags *s_flags, char *str_hexa)
       ft_memset(&var->buf_tmp[var->i_buf_tmp], ' ', var->k);
       var->i_buf_tmp += var->k;
       ft_memcpy(&var->buf[var->i_buf], var->buf_tmp, var->i_buf_tmp + var->len_str_hexa);
-      var->i_buf += s_flags->largeur;
+      var->i_buf += (s_flags->largeur < var->i_buf_tmp) ? s_flags->largeur : var->i_buf_tmp;
     }
   else if ((s_flags->c & (1 << 0)))
     {
@@ -186,14 +188,18 @@ static void		ft_flags_stock2(t_var *var, t_flags *s_flags, char *str_hexa)
 	}
       else
 	{
-	  var->i_moins = ft_stock_moins(var, str_hexa);
+	  if (s_flags->largeur < var->len_str_hexa)
+	      var->i_moins = ft_stock_moins(var, str_hexa);
+	  if (str_hexa[0] == '-')
+	    var->i_moins = 1;
 	  var->i_plus = (s_flags->c & (1 << 1)) ? 1 : 0;
-	  var->k = ((var->type == TYPE_HEXA || var->type == TYPE_HEXA_MAJ) && var->len_str_hexa) ? s_flags->largeur - s_flags->precision - 2 : s_flags->largeur - s_flags->precision - var->i_moins - var->i_plus;
+	  var->k = ((var->type == TYPE_HEXA || var->type == TYPE_HEXA_MAJ) && var->len_str_hexa) ? s_flags->largeur - s_flags->precision : s_flags->largeur - s_flags->precision - var->i_moins - var->i_plus;
 	  ft_memset(&var->buf_tmp[0], ' ', var->k);
 	  var->i_buf_tmp += var->k;
+	  if (!(s_flags->largeur < var->len_str_hexa))
+	      var->i_moins = ft_stock_moins(var, str_hexa);
 	  ft_stock_plus(var, s_flags, str_hexa);
-	  (var->type == TYPE_HEXA && var->len_str_hexa) ? ft_memcpy(&var->buf_tmp[var->i_buf_tmp - 2], "0x", 2) : 0;
-	  (var->type == TYPE_HEXA_MAJ && var->len_str_hexa) ? ft_memcpy(&var->buf_tmp[var->i_buf_tmp - 2], "0X", 2) : 0;
+	  ft_stock_buf_base(var, s_flags, var->res_strcmp, var->len_str_hexa);
 	  var->k = s_flags->precision - var->len_str_hexa + var->i_moins;
 	  ft_memset(&var->buf_tmp[var->i_buf_tmp], '0', var->k);
 	  var->i_buf_tmp += var->k;
@@ -213,6 +219,7 @@ void	ft_flags_stock(t_var *var, t_flags *s_flags, char *str_hexa)
 	var->res_strcmp = ft_strcmp(str_hexa, "0");
 	var->len_str_hexa = ft_strlen(str_hexa);
 	var->i_buf_tmp = 0;
+	var->i_moins = 0;
 	if (s_flags->c == 8 && s_flags->m == 0 && !s_flags->largeur && !s_flags->precision && var->type == TYPE_SHORT && str_hexa[0] != '-')
 	  var->buf[var->i_buf++] = ' ';
 	if (s_flags->precision >= s_flags->largeur && s_flags->precision >= var->len_str_hexa)
@@ -228,5 +235,6 @@ void	ft_flags_stock(t_var *var, t_flags *s_flags, char *str_hexa)
 		(!var->len_str_hexa && !s_flags->precision && (var->type >= TYPE_OCTAL && var->type <= TYPE_HEXA_MAJ)) ? ft_memcpy(&var->buf[var->i_buf++], "0", 1) : 0;
 	}
 	else
-	  ft_flags_stock2(var, s_flags, str_hexa);
+	    ft_flags_stock2(var, s_flags, str_hexa);
+	free(str_hexa);
 }

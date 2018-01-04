@@ -23,20 +23,20 @@ int		ft_printf(const char *format, ...)
 	var.ret = 0;
 	var.i_buf = 0;
 	s_flags.c = 0;
-	ft_bzero(var.buf, 2000);
-	ft_strcpy(var.flags_conv, "cCdDioOuUxXpsSb");
+	ft_bzero(var.buf, 500);
+	ft_strcpy(var.flags_conv, "cdDioOuUxXpsSb");
 	while (format[var.ret])
 	{
-		while (format[var.ret] && format[var.ret] != '%' && var.i_buf != 2000)
+		while (format[var.ret] && format[var.ret] != '%' && var.i_buf <= 500)
 			var.buf[var.i_buf++] = format[var.ret++];
-		if (var.i_buf == 2000)
+		if (var.i_buf > 500)
 		{
-			write(1, var.buf, 2000);
+			write(1, var.buf, 500);
 			var.i_buf = 0;
-			ft_bzero(var.buf, 2000);
+			ft_bzero(var.buf, 500);
 		}
 		var.ret += ft_stock_flags(&((char*)format)[var.ret], &var);
-		if (ft_strlen(var.flags_stock) == 0)
+		if (!ft_strlen(var.flags_stock))
 			break;
 		(!ft_flags(&var.flags_stock[1], &s_flags)) ? ft_print_buffer(ap, &var) : ft_print_flags_buffer(ap, &var, &s_flags);
 		ft_bzero(var.nb.str, 8);

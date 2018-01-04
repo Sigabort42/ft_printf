@@ -42,8 +42,8 @@ enum
 	TYPE_CHAR,
 	TYPE_WCHAR,
 	TYPE_SHORT,
-	TYPE_SHORT_MAJ,
 	TYPE_INT,
+	TYPE_SHORT_MAJ,
 	TYPE_UNSIGNED,
 	TYPE_UNSIGNED_MAJ,
 	TYPE_OCTAL,
@@ -57,13 +57,14 @@ enum
 	TYPE_LONG,
 	TYPE_LONG_LONG,
 	TYPE_BITWISE,
+	TYPE_NON_CONNU,
 };
 
 typedef struct	s_var
 {
 	char		*res;
-	char		buf[2000];
-	char		buf_tmp[1000];
+	char		buf[500];
+	char		buf_tmp[500];
 	char		flags_stock[100];
 	char		flags_conv[15];
 	int			ret;
@@ -97,6 +98,8 @@ char	*ft_ltoa_base(long value, int base);
 char	*ft_ltoa_base_maj(long value, int base);
 char	*ft_lltoa_base(unsigned long long value, int base);
 char	*ft_lltoa_base_maj(unsigned long long value, int base);
+char	*ft_i_maxtoa_base(intmax_t value, int base);
+char	*ft_i_maxtoa_base_maj(intmax_t value, int base);
 char	*ft_ui_maxtoa_base(uintmax_t value, int base);
 char	*ft_ui_maxtoa_base_maj(uintmax_t value, int base);
 void	ft_type(t_var *var, char c);

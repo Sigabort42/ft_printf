@@ -40,6 +40,12 @@ int		ft_stock_flags(char *str, t_var *var)
 			var->flags_stock[var->i_stock++] = str[i++];
 			return (i);
 		}
+		else if (!str[i] && str[i] != var->flags_conv[j])
+		{
+			ft_type(var, 'N');
+			var->nb.c = str[i];
+			return (i + 1);
+		}
 	}
 	return (0);
 }

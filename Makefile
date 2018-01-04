@@ -28,6 +28,8 @@ SRCS	=	ft_is_number.c \
 			ft_ltoa_base_maj.c \
 			ft_lltoa_base.c \
 			ft_lltoa_base_maj.c \
+			ft_i_maxtoa_base.c \
+			ft_i_maxtoa_base_maj.c \
 			ft_ui_maxtoa_base.c \
 			ft_ui_maxtoa_base_maj.c \
 			ft_stock_flags.c \

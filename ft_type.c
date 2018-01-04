@@ -19,7 +19,7 @@ void	ft_type(t_var *var, char c)
 	else if (c == 'd')
 		var->type = TYPE_SHORT;
 	else if (c == 'D')
-		var->type = TYPE_UNSIGNED;
+		var->type = TYPE_SHORT_MAJ;
 	else if (c == 'i')
 		var->type = TYPE_INT;
 	else if (c == 's')
@@ -44,4 +44,6 @@ void	ft_type(t_var *var, char c)
 		var->type = TYPE_BITWISE;
 	else if (c == 'S')
 		var->type = TYPE_WSTRING;
+	else if (c == 'N')
+		var->type = TYPE_NON_CONNU;
 }

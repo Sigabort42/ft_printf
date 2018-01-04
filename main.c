@@ -10,13 +10,16 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <limits.h>
 #include "ft_printf.h"
 
 int		main()
 {
-  printf("\n%d\n", ft_printf("%-10s is a string", ""));
-  printf("\n%d\n", printf("%-10s is a string", ""));
- //	printf("%d\n", ft_printf("salut toi comment %o %D %s %d %10.5s lol\n", 6500000000000, 18446744073709551615, 0, -2, "0"));
-//	printf("%d\n", printf("salut toi comment %o %D %s %d %10.5s lol\n", 6500000000000, 18446744073709551615, 0, -2, "0"));
-	return (0);
+  printf("\n%d\n", ft_printf("1234"));
+  printf("\n%d\n", printf("1234"));
+  //  printf("\n%d\n", ft_printf("{%-15ZZZZ}", 123));
+  //  printf("\n%d\n", printf("{%-15ZZZZ}", 123));
+  //	printf("%d\n", ft_printf("salut toi comment %o %D %s %d %10.5s lol\n", 6500000000000, 18446744073709551615, 0, -2, "0"));
+  //	printf("%d\n", printf("salut toi comment %o %D %s %d %10.5s lol\n", 6500000000000, 18446744073709551615, 0, -2, "0"));
+  return (0);
 }
