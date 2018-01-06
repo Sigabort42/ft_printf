@@ -6,7 +6,7 @@
 /*   By: elbenkri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/14 12:45:52 by elbenkri          #+#    #+#             */
-/*   Updated: 2017/12/28 13:33:11 by elbenkri         ###   ########.fr       */
+/*   Updated: 2018/01/04 03:36:09 by elbenkri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ char			*ft_lltoa_base_maj(unsigned long long value, int base)
 
 	res = NULL;
 	if (base == 10)
-	  return (ft_lltoa(value));
+		return (ft_lltoa(value));
 	i = ft_count(value, base);
 	res = (char*)malloc(sizeof(char) * i);
 	res[i] = 0;

@@ -6,7 +6,7 @@
 /*   By: elbenkri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/10 17:33:04 by elbenkri          #+#    #+#             */
-/*   Updated: 2017/12/28 12:26:42 by elbenkri         ###   ########.fr       */
+/*   Updated: 2018/01/04 04:01:14 by elbenkri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,25 +17,31 @@
 # include <stdint.h>
 #include <stdio.h>
 
-typedef union		u_var_nb
+typedef struct		s_color
 {
-	char			c;
-	unsigned char	u_c;
-	short			sh;
-	unsigned short	u_sh;
-	int				i;
-	intmax_t	i_max;
-	uintmax_t	ui_max;
-	size_t		s_i;
-	ssize_t		s_ui;
-	unsigned int	u_i;
-	char			str[8];
-	long			l;
-	unsigned long	u_l;
-	long long	ll_i;
+  char                  *color;
+  char                  *unicode;
+}			t_color;
+
+typedef union			u_var_nb
+{
+	char				c;
+	unsigned char		u_c;
+	short				sh;
+	unsigned short		u_sh;
+	int					i;
+	intmax_t			i_max;
+	uintmax_t			ui_max;
+	size_t				s_i;
+	ssize_t				s_ui;
+	unsigned int		u_i;
+	char				str[8];
+	long				l;
+	unsigned long		u_l;
+	long long			ll_i;
 	unsigned long long		ll;
-	void			*ptr;
-}					t_uvar_nb;
+	void					*ptr;
+}						t_uvar_nb;
 
 enum
 {
@@ -65,7 +71,7 @@ typedef struct	s_var
 	char		*res;
 	char		buf[500];
 	char		buf_tmp[500];
-	char		flags_stock[100];
+	char		flags_stock[50];
 	char		flags_conv[15];
 	int			ret;
 	int			i_buf;
@@ -73,11 +79,12 @@ typedef struct	s_var
 	int			i_stock;
 	t_uvar_nb	nb;
 	int			type;
-	int		i_plus;
-	int		i_moins;
-  int		len_str_hexa;
-  int		res_strcmp;
-  int		k;
+	int			i_plus;
+	int			i_moins;
+	int			len_str_hexa;
+	int			res_strcmp;
+	int			k;
+	int			fd;
 }				t_var;
 
 typedef struct	s_flags
@@ -88,7 +95,7 @@ typedef struct	s_flags
 	char		m;
 }				t_flags;
 
-void		ft_print_bit(int c);
+void	ft_print_bit(int c);
 int		ft_printf(const char *format, ...);
 int		ft_is_number(long long nb);
 int		ft_is_number_u_long_long(unsigned long long nb);
@@ -106,13 +113,11 @@ void	ft_type(t_var *var, char c);
 int		ft_stock_flags(char *str, t_var *var);
 void	ft_stock_ap(va_list ap, t_var *var);
 char	*ft_ltoa(long n);
-char	*ft_stoa(ssize_t n);
 char	*ft_lltoa(unsigned long long n);
-char	*ft_lldtoa(long long n);
 char	*ft_i_maxtoa(intmax_t n);
 char	*ft_ui_maxtoa(uintmax_t n);
 void	ft_print_buffer(va_list ap, t_var *var);
-int		ft_flags(char *flags, t_flags *s_flags);
+int		ft_flags(char *flags, t_flags *s_flags, va_list ap);
 int		ft_print_flags_buffer(va_list ap, t_var *var, t_flags *s_flags);
 void	ft_flags_stock(t_var *var, t_flags *s_flags, char *str_hexa);
 

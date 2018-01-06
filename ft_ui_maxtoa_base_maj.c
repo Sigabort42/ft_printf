@@ -6,7 +6,7 @@
 /*   By: elbenkri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/14 12:45:52 by elbenkri          #+#    #+#             */
-/*   Updated: 2017/12/22 16:14:11 by elbenkri         ###   ########.fr       */
+/*   Updated: 2018/01/04 03:39:31 by elbenkri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ char			*ft_ui_maxtoa_base_maj(uintmax_t value, int base)
 	int		i;
 
 	if (base == 10)
-	  return (ft_ui_maxtoa(value));
+		return (ft_ui_maxtoa(value));
 	i = ft_count(value, base);
 	res = (char*)malloc(sizeof(char) * i);
 	res[i] = 0;
