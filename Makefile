@@ -21,7 +21,6 @@ CFLAGS	=	-Wall -Wextra -Werror
 HEADER	=	ft_printf.h
 
 SRCS	=	ft_is_number.c \
-			ft_is_number_u_long_long.c \
 			ft_itoa_base.c \
 			ft_itoa_base_maj.c \
 			ft_ltoa_base.c \
@@ -35,11 +34,8 @@ SRCS	=	ft_is_number.c \
 			ft_stock_flags.c \
 			ft_type.c \
 			ft_printf.c \
-			ft_stock_ap.c \
 			ft_ltoa.c \
-			ft_stoa.c \
 			ft_lltoa.c \
-			ft_lldtoa.c \
 			ft_i_maxtoa.c \
 			ft_ui_maxtoa.c \
 			ft_print_buffer.c \
@@ -47,25 +43,32 @@ SRCS	=	ft_is_number.c \
 			ft_print_flags_buffer.c \
 			ft_flags_stock.c \
 			ft_wchar.c \
+			ft_wstrlen.c \
+			ft_conv_envoi_maj.c \
+			ft_conv_envoi.c \
+			ft_flags_largeur.c \
 
 OBJS	=	$(SRCS:.c=.o)
 
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	ar rc $(NAME_TMP) $(OBJS)
-	make -C	libft/
-	libtool -static -o $(NAME) $(NAME_TMP) libft/libft.a
-	ranlib $(NAME)
-	rm -rf $(NAME_TMP)
+	@ar rc $(NAME_TMP) $(OBJS)
+	@make -C	libft/
+	@libtool -static -o $(NAME) $(NAME_TMP) libft/libft.a
+	@ranlib $(NAME)
+	@rm -rf $(NAME_TMP)
+	@echo "\033[H\033[2J\033[32;5m[OK...]"
 
 clean:
-	make -C libft/ clean
+	@make -C libft/ clean
 	rm -rf $(OBJS)
 	rm -rf $(NAME_TMP)
+	@echo "\033[H\033[2J\033[32;5m[OK...]"
 
 fclean:	clean
-	make -C libft/ fclean
+	@make -C libft/ fclean
 	rm -rf $(NAME)
+	@echo "\033[H\033[2J\033[32;5m[OK...]"
 
 re: fclean all

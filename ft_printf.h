@@ -15,6 +15,7 @@
 # include <stdlib.h>
 # include <stdarg.h>
 # include <stdint.h>
+#include "./libft/libft.h"
 #include <stdio.h>
 
 typedef struct		s_color
@@ -26,6 +27,8 @@ typedef struct		s_color
 typedef union			u_var_nb
 {
 	char				c;
+	wchar_t				chr;
+	wchar_t				*chr2;
 	unsigned char		u_c;
 	short				sh;
 	unsigned short		u_sh;
@@ -45,8 +48,12 @@ typedef union			u_var_nb
 
 enum
 {
+	TYPE_NON_CONNU,
+	TYPE_MODULO,
 	TYPE_CHAR,
 	TYPE_WCHAR,
+	TYPE_STRING,
+	TYPE_WSTRING,
 	TYPE_SHORT,
 	TYPE_INT,
 	TYPE_SHORT_MAJ,
@@ -57,13 +64,9 @@ enum
 	TYPE_HEXA,
 	TYPE_HEXA_MAJ,
 	TYPE_ADDRESS,
-	TYPE_STRING,
-	TYPE_WSTRING,
-	TYPE_MODULO,
 	TYPE_LONG,
 	TYPE_LONG_LONG,
 	TYPE_BITWISE,
-	TYPE_NON_CONNU,
 };
 
 typedef struct	s_var
@@ -96,10 +99,8 @@ typedef struct	s_flags
 	char		m;
 }				t_flags;
 
-void	ft_print_bit(int c);
 int		ft_printf(const char *format, ...);
 int		ft_is_number(long long nb);
-int		ft_is_number_u_long_long(unsigned long long nb);
 char	*ft_itoa_base(int value, int base);
 char	*ft_itoa_base_maj(int value, int base);
 char	*ft_ltoa_base(long value, int base);
@@ -112,7 +113,6 @@ char	*ft_ui_maxtoa_base(uintmax_t value, int base);
 char	*ft_ui_maxtoa_base_maj(uintmax_t value, int base);
 void	ft_type(t_var *var, char c);
 int		ft_stock_flags(char *str, t_var *var);
-void	ft_stock_ap(va_list ap, t_var *var);
 char	*ft_ltoa(long n);
 char	*ft_lltoa(unsigned long long n);
 char	*ft_i_maxtoa(intmax_t n);
@@ -122,5 +122,10 @@ int		ft_flags(char *flags, t_flags *s_flags, va_list ap);
 int		ft_print_flags_buffer(va_list ap, t_var *var, t_flags *s_flags);
 void	ft_flags_stock(t_var *var, t_flags *s_flags, char *str_hexa);
 void	ft_wchar(wchar_t chr, t_var *var, int i);
+int	ft_wstrlen(wchar_t chr);
+void	ft_conv_envoi(va_list ap, t_var *var, t_flags *s_flags, int base);
+void	ft_conv_envoi_maj(va_list ap, t_var *var, t_flags *s_flags, int base);
+void	ft_flags_largeur(t_var *var, t_flags *s_flags, int i);
+void	ft_flags_precision(t_var *var, t_flags *s_flags, int i);
 
 #endif

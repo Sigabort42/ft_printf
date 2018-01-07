@@ -15,8 +15,9 @@
 
 int		ft_verif_conv(t_var *var, char c)
 {
-	if (c !=  'l' && c != 'h' && c != 'z' && c != 'j' && c != '-' && c != '+'
-		&& c != '0'&& c != ' ' && c != '#' && c != '.' && c != '%' && !ft_strchr(var->flags_conv, c))
+	if (c !=  'l' && c != 'h' && c != 'z' && c != 'j' && c != '-' &&
+	    c != '+' && c != '0'&& c != ' ' && c != '#' && c != '.' && c != '%'
+/*&& c != '*'*/ && !ft_strchr(var->flags_conv, c))
 	{
 		if (!ft_isdigit(c))
 		{
@@ -24,6 +25,19 @@ int		ft_verif_conv(t_var *var, char c)
 			var->res = &c;
 			return (1);
 		}
+	}
+	return (0);
+}
+
+static int	ft_stock_flags2(char *str, t_var *var, int *i)
+{
+	if (!str[*i] || str[*i] == '%')
+	{
+		ft_type(var, '%');
+		var->flags_stock[var->i_stock++] = str[*i];
+		*i = *i + 1;
+		var->flags_stock[var->i_stock] = 0;
+		return (1);
 	}
 	return (0);
 }
@@ -52,13 +66,8 @@ int		ft_stock_flags(char *str, t_var *var)
 		}
 		var->flags_stock[var->i_stock++] = str[i++];
 		var->flags_stock[var->i_stock] = 0;
-		if (!str[i] || str[i] == '%')
-		{
-			ft_type(var, '%');
-			var->flags_stock[var->i_stock++] = str[i++];
-			var->flags_stock[var->i_stock] = 0;
+		if (ft_stock_flags2(str, var, &i))
 			return (i);
-		}
 	}
 	return (0);
 }

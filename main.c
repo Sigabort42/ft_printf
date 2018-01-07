@@ -19,10 +19,12 @@
 
 int		main()
 {
-  setlocale(LC_ALL, "");
+   setlocale(LC_ALL, "");
 
-  printf("\n%d\n", ft_printf("%hhS, %hhS", 0, L"Á±≥Á±≥"));
-  printf("\n%d\n", printf("%hhS, %hhS", 0, L"Á±≥Á±≥"));
+   //  printf("\n%d\n", ft_printf("salut toi %C comment tu va", 2147483647));
+   // printf("\n%d\n", printf("salut toi %C comment tu va", 2147483647));
+   //   printf("\n%d\n", ft_printf("%+lld", 4242424242424242424242));
+   //printf("\n%d\n", printf("%+lld", 4242424242424242424242));
 //printf("\n%d\n", ft_printf("{%10R}"));
     //   printf("\n%d\n", printf("{%10R}"));
    /*  printf("\n%d\n", ft_printf("{%-12p}", &strlen));
