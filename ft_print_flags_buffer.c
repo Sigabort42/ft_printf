@@ -90,7 +90,11 @@ static void	ft_flags_largeur(t_var *var, t_flags *s_flags, int i)
 static void		ft_conv_envoi(va_list ap, t_var *var, t_flags *s_flags, int base)
 {
 	if (var->type == TYPE_UNSIGNED_MAJ || var->type == TYPE_OCTAL_MAJ || var->type == TYPE_BITWISE)
-		ft_flags_stock(var, s_flags, ft_ltoa_base(va_arg(ap, unsigned long), base));
+	  {
+		ft_flags_stock(var, s_flags, ft_lltoa_base(va_arg(ap, unsigned long), base));
+	  }
+	else if ((s_flags->m & (1 << 3)) && ((var->type >= TYPE_OCTAL && var->type <= TYPE_HEXA_MAJ)|| var->type == TYPE_UNSIGNED))
+		ft_flags_stock(var, s_flags, ft_lltoa_base(va_arg(ap, unsigned long long), base));
 	else if ((s_flags->m & (1 << 3)) || var->type == TYPE_SHORT_MAJ)
 		ft_flags_stock(var, s_flags, ft_ltoa_base(va_arg(ap, long long), base));
 	else if ((s_flags->m & (1 << 0)) && (var->type >= TYPE_UNSIGNED && var->type <= TYPE_HEXA_MAJ))
@@ -124,7 +128,9 @@ static void		ft_conv_envoi(va_list ap, t_var *var, t_flags *s_flags, int base)
 
 static void		ft_conv_envoi_maj(va_list ap, t_var *var, t_flags *s_flags, int base)
 {
-	if ((s_flags->m & (1 << 3)))
+	if ((s_flags->m & (1 << 3)) && (var->type >= TYPE_OCTAL && var->type <= TYPE_HEXA_MAJ))
+		ft_flags_stock(var, s_flags, ft_lltoa_base_maj(va_arg(ap, unsigned long long), base));
+	else if ((s_flags->m & (1 << 3)))
 		ft_flags_stock(var, s_flags, ft_ltoa_base_maj(va_arg(ap, long long), base));
 	else if ((s_flags->m & (1 << 0)) && (var->type == TYPE_OCTAL_MAJ || var->type == TYPE_UNSIGNED_MAJ))
 		ft_flags_stock(var, s_flags, ft_itoa_base_maj((unsigned short)va_arg(ap, int), base));
@@ -155,12 +161,31 @@ static void		ft_conv_envoi_maj(va_list ap, t_var *var, t_flags *s_flags, int bas
     }
 }
 
+static int	       	ft_wstrlen(wchar_t chr)
+{
+  if (chr <= 0x7F)
+    return (1);
+  else if (chr <= 0x7FF)
+    return (2);
+  else if (chr <= 0xFFFF)
+    return (3);
+  else if (chr <= 0x10FFFF)
+    return (4);
+  return (0);
+}
+
 int			ft_print_flags_buffer(va_list ap, t_var *var, t_flags *s_flags)
 {
 	char	tab[] = "(null)";
+	wchar_t chr;
+	wchar_t *chr2;
+	int	i;
+	int	res;
 
+	i = 0;
+	res = 0;
 	var->res = NULL;
-	if (var->type == TYPE_STRING || var->type == TYPE_CHAR || var->type == TYPE_MODULO || var->type == TYPE_NON_CONNU)
+	if (var->type == TYPE_STRING || var->type == TYPE_CHAR || var->type == TYPE_MODULO || var->type == TYPE_NON_CONNU || var->type == TYPE_WCHAR || var->type == TYPE_WSTRING)
     {
 		var->i_buf_tmp = 0;
 		if (var->type == TYPE_MODULO)
@@ -169,11 +194,29 @@ int			ft_print_flags_buffer(va_list ap, t_var *var, t_flags *s_flags)
 			var->res = &var->nb.c;
 			var->res[1] = 0;
 		}
+		else if (var->type == TYPE_WCHAR)// || (var->type == TYPE_CHAR && s_flags->m == 4))
+		{
+		  chr = (wchar_t)va_arg(ap, int);
+		  var->res = ft_strnew(ft_wstrlen(chr));
+		}
 		else if (var->type == TYPE_CHAR)
 		{
 			var->nb.c = va_arg(ap, int);
 			var->res = &var->nb.c;
 			var->res[1] = 0;
+		}
+		else if (var->type == TYPE_WSTRING)
+		{
+		  chr2 = (wchar_t*)va_arg(ap, int*);
+		  if (!chr2)
+		    ;
+		  else
+		    {
+		      while (chr2[i])
+			res += ft_wstrlen(chr2[i++]);
+		      var->res = ft_strnew(res);
+		    }
+		  i = 0;
 		}
 		else if (var->type == TYPE_STRING)
 			var->res = va_arg(ap, char*);
@@ -191,8 +234,31 @@ int			ft_print_flags_buffer(va_list ap, t_var *var, t_flags *s_flags)
 		}
 		else
 		{
-			var->res = (var->type == TYPE_STRING) ? tab : 0;
+			var->res = (var->type == TYPE_STRING || var->type == TYPE_WSTRING) ? tab : 0;
 			ft_flags_precision(var, s_flags, 0);
+		}
+		if (var->type == TYPE_WCHAR)
+		{
+		  if (s_flags->largeur > ft_wstrlen(chr))
+		    ft_wchar(chr, var, ft_wstrlen(chr));
+		  else
+		    ft_wchar(chr, var, 0);
+		}
+		else if (var->type == TYPE_WSTRING && var->res && chr2)
+		{
+		  if (s_flags->largeur > res)
+		  {
+		      while (chr2[i])
+			{
+			  ft_wchar(chr2[i++], var, res);
+			  res = 0;
+			}
+		  }
+		  else
+		  {
+		    while (chr2[i])
+		      ft_wchar(chr2[i++], var, 0);
+		  }
 		}
     }
 	else

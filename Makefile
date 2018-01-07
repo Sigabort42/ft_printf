@@ -46,6 +46,7 @@ SRCS	=	ft_is_number.c \
 			ft_flags.c \
 			ft_print_flags_buffer.c \
 			ft_flags_stock.c \
+			ft_wchar.c \
 
 OBJS	=	$(SRCS:.c=.o)
 

@@ -51,13 +51,24 @@ static void	ft_print_buffer2(va_list ap, char *str, t_var *var)
 void		ft_print_buffer(va_list ap, t_var *var)
 {
 	char	*str;
+	wchar_t	*chr2;
+	int		i = 0;
 
-	if (var->type == TYPE_STRING || var->type == TYPE_CHAR || var->type == TYPE_WSTRING)
+	if (var->type == TYPE_STRING || var->type == TYPE_CHAR || var->type == TYPE_WSTRING || var->type == TYPE_WCHAR)
 	{
 		if (var->type == TYPE_WSTRING)
 		{
-		  ;
+		  chr2 = (wchar_t*)va_arg(ap, int*);
+		  if (!chr2)
+		    ft_memcpy(&var->buf[var->i_buf], "(null)", var->i_buf += 6);
+		  else
+		  {
+		    while (chr2[i])
+		      ft_wchar(chr2[i++], var, 0);
+		  }
 		}
+		else if (var->type == TYPE_WCHAR)
+		  ft_wchar((wchar_t)va_arg(ap, int), var, 0);
 		else if (var->type == TYPE_CHAR)
 		    var->buf[var->i_buf++] = va_arg(ap, int);
 		else if (var->type == TYPE_STRING && !(var->res = va_arg(ap, char *)))

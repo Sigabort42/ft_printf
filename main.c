@@ -15,12 +15,25 @@
 #include <limits.h>
 #include "ft_printf.h"
 #include "libft/libft.h"
+#include <locale.h>
 
 int		main()
 {
-  printf("\n%d\n", ft_printf("%4.s", "42"));
-  printf("\n%d\n", printf("%4.s", "42"));
-  //  printf("\n%d\n", ft_printf("%llx", 9223372036854775808));
+  setlocale(LC_ALL, "");
+
+  printf("\n%d\n", ft_printf("%hhS, %hhS", 0, L"Á±≥Á±≥"));
+  printf("\n%d\n", printf("%hhS, %hhS", 0, L"Á±≥Á±≥"));
+//printf("\n%d\n", ft_printf("{%10R}"));
+    //   printf("\n%d\n", printf("{%10R}"));
+   /*  printf("\n%d\n", ft_printf("{%-12p}", &strlen));
+  printf("\n%d\n", printf("{%-12p}", &strlen));
+  printf("\n%d\n", ft_printf("{%-13p}", &strlen));
+  printf("\n%d\n", printf("{%-13p}", &strlen));
+  printf("\n%d\n", ft_printf("{%-15p}", 0));
+  printf("\n%d\n", printf("{%-15p}", 0));
+  printf("\n%d\n", ft_printf("%#-08x", 42));
+  printf("\n%d\n", printf("%#-08x", 42));
+   */ //  printf("\n%d\n", ft_printf("%llx", 9223372036854775808));
   //  printf("\n%d\n", printf("%llx", 9223372036854775808));
   //  printf("\n%d\n", ft_printf("salut {fd}2 toi %s %s %10d", "a", "def", 1234));
   //  printf("\n%d\n", printf("salut toi %s %s %*d", "a", "def", 10, 1234));

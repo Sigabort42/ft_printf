@@ -102,10 +102,9 @@ static void	ft_flags_stock5(t_var *var, t_flags *s_flags, char *str_hexa)
 		var->i_buf_tmp += var->k;
 		(var->type == TYPE_ADDRESS) ? ft_memcpy(&var->buf_tmp[var->i_buf_tmp], "0x", var->i_buf_tmp += 2) : 0;
 		if (!(!var->res_strcmp && var->len_str_hexa == 1 && s_flags->m == 0))
-		{
-			ft_memcpy(&var->buf_tmp[var->i_buf_tmp], str_hexa, var->len_str_hexa);
-			var->i_buf_tmp += var->len_str_hexa;
-		}
+			ft_memcpy(&var->buf_tmp[var->i_buf_tmp], str_hexa, var->i_buf_tmp += var->len_str_hexa);
+		else if (var->type == TYPE_ADDRESS && !var->res_strcmp)
+		  ft_memcpy(&var->buf_tmp[var->i_buf_tmp], str_hexa, var->i_buf_tmp += var->len_str_hexa);
 		(var->type == TYPE_ADDRESS) ? ft_memcpy(&var->buf[var->i_buf], var->buf_tmp, var->i_buf_tmp) : ft_memcpy(&var->buf[var->i_buf], var->buf_tmp, var->i_buf_tmp + var->len_str_hexa);
 		var->i_buf += s_flags->largeur;
     }
@@ -115,16 +114,18 @@ static void	ft_flags_stock4(t_var *var, t_flags *s_flags, char *str_hexa)
 {
 	if ((s_flags->c & (1 << 2)))
     {
-		ft_stock_buf_base(var, s_flags, var->res_strcmp, var->len_str_hexa);
+		var->i_stock_buf = ft_stock_buf_base(var, s_flags, var->res_strcmp, var->len_str_hexa);
 		ft_memcpy(&var->buf_tmp[var->i_buf_tmp], str_hexa, var->len_str_hexa);
 		var->i_buf_tmp += var->len_str_hexa;
-		var->k = (var->len_str_hexa) ? s_flags->largeur - s_flags->precision - var->len_str_hexa : s_flags->largeur - s_flags->precision;
+		var->k = s_flags->largeur - s_flags->precision - var->len_str_hexa  - var->i_stock_buf;
+		if (var->k < 0)
+		  var->k = 0;
 		if (var->type == TYPE_BITWISE)
 			var->k = s_flags->largeur - var->len_str_hexa;
 		ft_memset(&var->buf_tmp[var->i_buf_tmp], ' ', var->k);
 		var->i_buf_tmp += var->k;
 		ft_memcpy(&var->buf[var->i_buf], var->buf_tmp, var->i_buf_tmp + var->len_str_hexa);
-		var->i_buf += (s_flags->largeur <= var->i_buf_tmp) ? s_flags->largeur : var->i_buf_tmp;
+		var->i_buf += var->i_buf_tmp;
     }
 	else if ((s_flags->c & (1 << 0)))
     {

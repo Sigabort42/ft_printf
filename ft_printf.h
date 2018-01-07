@@ -75,12 +75,13 @@ typedef struct	s_var
 	char		flags_conv[15];
 	int			ret;
 	int			i_buf;
-	int			i_buf_tmp;;
+	int			i_buf_tmp;
 	int			i_stock;
 	t_uvar_nb	nb;
 	int			type;
 	int			i_plus;
 	int			i_moins;
+	int			i_stock_buf;
 	int			len_str_hexa;
 	int			res_strcmp;
 	int			k;
@@ -120,5 +121,6 @@ void	ft_print_buffer(va_list ap, t_var *var);
 int		ft_flags(char *flags, t_flags *s_flags, va_list ap);
 int		ft_print_flags_buffer(va_list ap, t_var *var, t_flags *s_flags);
 void	ft_flags_stock(t_var *var, t_flags *s_flags, char *str_hexa);
+void	ft_wchar(wchar_t chr, t_var *var, int i);
 
 #endif
