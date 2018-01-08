@@ -13,18 +13,6 @@
 #include "libft/libft.h"
 #include "ft_printf.h"
 
-void			ft_print_bit(int c)
-{
-	int			i;
-
-	i = 8;
-	while (i >= 0)
-	{
-		ft_putchar((!!(c & (1 << i))) + 48);
-		i--;
-	}
-}
-
 static void		ft_verif_modificateur(char *mod, t_flags *s_flags)
 {
 	s_flags->m = 0;

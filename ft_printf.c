@@ -13,10 +13,8 @@
 #include "libft/libft.h"
 #include "ft_printf.h"
 
-const char              *reset_color = "\033[0m";
-
 static const t_color    g_color[] =
-  {
+{
     {"clear", "\033[H\033[2J"},
     {"{red}", "\033[31m"},
     {"{green}", "\033[32m"},
@@ -25,11 +23,12 @@ static const t_color    g_color[] =
     {"{magenta}", "\033[35m"},
     {"{cyan}", "\033[36m"},
     {NULL, NULL}
-  };
+};
 
 
 static int		ft_color(const char *format, t_var *var)
 {
+  const char		*reset_color = "\033[0m";
   int	i;
 
   i = 0;
@@ -56,7 +55,7 @@ static int	ft_fd(const char *format, t_var *var)
   static int	i = 0;
 
   if (ft_strnequ("{fd}", &format[0], 4))
-    {
+   {
       if (format[4] >= '0' && format[4] <= '9')
 	{
 	  var->ret += 6;
@@ -81,6 +80,7 @@ int		ft_printf(const char *format, ...)
   var.ret = 0;
   var.i_buf = 0;
   s_flags.c = 0;
+  var.nb_conv = 0;
   ft_bzero(var.buf, 500);
   ft_strcpy(var.flags_conv, "cCdDioOuUxXpsSb");
   while (format[var.ret])
@@ -101,10 +101,24 @@ int		ft_printf(const char *format, ...)
       if ((var.type == TYPE_WSTRING || var.type == TYPE_WCHAR) && MB_CUR_MAX <= 1)
 	return (-1);
       (!ft_flags(&var.flags_stock[1], &s_flags, ap)) ? ft_print_buffer(ap, &var) : ft_print_flags_buffer(ap, &var, &s_flags);
+      var.nb_conv++;
+      if (var.nb.u_i > 1114111 && var.type == TYPE_WCHAR)
+	break;
       ft_bzero(var.nb.str, 8);
       ft_bzero(var.flags_stock, 50);
     }
   va_end(ap);
+  if (var.type == TYPE_WCHAR && !var.nb_conv)
+    return (-1);
+  else if (var.type == TYPE_WCHAR && var.nb_conv && var.nb.u_i > 1114111)
+  {
+    var.ret = var.ret - 1 - ft_strlen(var.flags_stock) - 1;
+      while (format[var.ret--] != '%')
+	var.i_buf--;
+      var.i_buf++;
+      write(var.fd, var.buf, var.i_buf);
+      return (-1);
+  }
   write(var.fd, var.buf, var.i_buf);
   return (var.i_buf);
 }

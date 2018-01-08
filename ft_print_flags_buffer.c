@@ -63,23 +63,23 @@ static void	ft_print_flags_buffer4(t_var *var, t_flags *s_flags, int res)
 
 static void	ft_print_flags_buffer3(va_list ap, t_var *var, t_flags *s_flags, int i)
 {
-	int		res;
-
-	res = 0;
 	if (var->type == TYPE_WCHAR)
 	{
-	  var->nb.chr = (wchar_t)va_arg(ap, int);
-	  res  = ft_wstrlen(var->nb.chr);
-	  var->res = ft_strnew(res);
+	  var->nb.u_i = va_arg(ap, unsigned int);
+	  if (var->nb.u_i > 1114111)
+	    return ;
+	  var->nb.chr = (wchar_t)var->nb.u_i;
+	  var->res2  = ft_wstrlen(var->nb.chr);
+	  var->res = ft_strnew(var->res2);
 	}
 	else if (var->type == TYPE_WSTRING)
 	{
-	  var->nb.chr2 = (wchar_t*)va_arg(ap, int*);
+	  var->nb.chr2 = (wchar_t*)va_arg(ap, unsigned int*);
 	  if (var->nb.chr2)
 	  {
 	    while (var->nb.chr2[i])
-	      res += ft_wstrlen(var->nb.chr2[i++]);
-	    var->res = ft_strnew(res);
+	      var->res2 += ft_wstrlen(var->nb.chr2[i++]);
+	    var->res = ft_strnew(var->res2);
 	  }
 	}
 	else if (var->type == TYPE_NON_CONNU)
@@ -87,7 +87,7 @@ static void	ft_print_flags_buffer3(va_list ap, t_var *var, t_flags *s_flags, int
 	  var->res = &var->nb.c;
 	  var->res[1] = 0;
 	}
-	ft_print_flags_buffer4(var, s_flags, res);
+	ft_print_flags_buffer4(var, s_flags, var->res2);
 }
 static void		ft_print_flags_buffer2(va_list ap, t_var *var, t_flags *s_flags)
 {

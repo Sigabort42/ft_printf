@@ -48,27 +48,31 @@ static void	ft_print_buffer2(va_list ap, char *str, t_var *var)
 	free(str);
 }
 
-void		ft_print_buffer(va_list ap, t_var *var)
+int		ft_print_buffer(va_list ap, t_var *var)
 {
 	char	*str;
-	wchar_t	*chr2;
 	int		i = 0;
 
 	if (var->type == TYPE_STRING || var->type == TYPE_CHAR || var->type == TYPE_WSTRING || var->type == TYPE_WCHAR)
 	{
 		if (var->type == TYPE_WSTRING)
 		{
-		  chr2 = (wchar_t*)va_arg(ap, int*);
-		  if (!chr2)
+		  var->nb.chr2 = (wchar_t*)va_arg(ap, unsigned int*);
+		  if (!var->nb.chr2)
 		    ft_memcpy(&var->buf[var->i_buf], "(null)", var->i_buf += 6);
 		  else
 		  {
-		    while (chr2[i])
-		      ft_wchar(chr2[i++], var, 0);
+		    while (var->nb.chr2[i])
+		      ft_wchar(var->nb.chr2[i++], var, 0);
 		  }
 		}
 		else if (var->type == TYPE_WCHAR)
-		  ft_wchar((wchar_t)va_arg(ap, int), var, 0);
+		{
+		  var->nb.u_i = va_arg(ap, unsigned int);
+		  if (var->nb.u_i > 1114111)
+		    return (0);
+		  ft_wchar((wchar_t)var->nb.u_i, var, 0);
+		}
 		else if (var->type == TYPE_CHAR)
 		    var->buf[var->i_buf++] = va_arg(ap, int);
 		else if (var->type == TYPE_STRING && !(var->res = va_arg(ap, char *)))
@@ -90,4 +94,5 @@ void		ft_print_buffer(va_list ap, t_var *var)
 	}
 	else
 		ft_print_buffer2(ap, str = NULL, var);
+	return (0);
 }

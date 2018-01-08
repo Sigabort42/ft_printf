@@ -47,6 +47,7 @@ SRCS	=	ft_is_number.c \
 			ft_conv_envoi_maj.c \
 			ft_conv_envoi.c \
 			ft_flags_largeur.c \
+			ft_stock_buf_base.c \
 
 OBJS	=	$(SRCS:.c=.o)
 

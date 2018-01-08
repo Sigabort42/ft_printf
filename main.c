@@ -21,8 +21,10 @@ int		main()
 {
    setlocale(LC_ALL, "");
 
-   //  printf("\n%d\n", ft_printf("salut toi %C comment tu va", 2147483647));
-   // printf("\n%d\n", printf("salut toi %C comment tu va", 2147483647));
+   printf("\n%d\n", ft_printf("%hhC, %hhC", 0, L'Á±≥'));
+   printf("\n%d\n", printf("%hhC, %hhC", 0, L'Á±≥'));
+   //   printf("\n%d\n", ft_printf("salut %s  toi %C comment tu va", "ouloulou", 1114112));
+   //printf("\n%d\n", printf("salut %s  toi %C comment tu va", "ouloulou", 1114112));
    //   printf("\n%d\n", ft_printf("%+lld", 4242424242424242424242));
    //printf("\n%d\n", printf("%+lld", 4242424242424242424242));
 //printf("\n%d\n", ft_printf("{%10R}"));
