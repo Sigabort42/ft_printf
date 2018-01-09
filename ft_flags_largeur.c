@@ -6,7 +6,7 @@
 /*   By: elbenkri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/08 16:06:54 by elbenkri          #+#    #+#             */
-/*   Updated: 2018/01/08 19:37:22 by elbenkri         ###   ########.fr       */
+/*   Updated: 2018/01/09 06:39:41 by elbenkri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,11 @@ static void		ft_flags_precision2(t_var *var, int i)
 
 void			ft_flags_precision(t_var *var, t_flags *s_flags, int i)
 {
-	char		tab[6];
-
-	if (!var->res && var->type == TYPE_STRING)
-		var->res = ft_strcpy(tab, "(null)");
-	else if (!s_flags->precision)
+	ft_bzero(var->buf_tmp, 500);
+	if (!s_flags->precision && ft_strchr(var->flags_stock, '.') &&
+		var->type != TYPE_MODULO)
+		var->res = 0;
+	if (!s_flags->precision && var->res)
 		s_flags->precision = (int)ft_strlen(var->res);
 	var->i_buf_tmp = (s_flags->c & (1 << 2)) ?
 		0 : s_flags->largeur - s_flags->precision;

@@ -6,7 +6,7 @@
 /*   By: elbenkri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/08 16:24:05 by elbenkri          #+#    #+#             */
-/*   Updated: 2018/01/08 19:00:50 by elbenkri         ###   ########.fr       */
+/*   Updated: 2018/01/09 07:25:53 by elbenkri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,17 +17,17 @@ void	ft_conv_envoi3(va_list ap, t_var *var, t_flags *s_flags, int base)
 	if ((s_flags->m & (1 << 5)) && (var->type >= TYPE_UNSIGNED &&
 									var->type <= TYPE_HEXA_MAJ))
 		ft_flags_stock(var, s_flags, ft_ui_maxtoa_base(va_arg(ap, ssize_t),
-														base));
+												base));
 	else if ((s_flags->m & (1 << 5)))
 		ft_flags_stock(var, s_flags, ft_ltoa_base(va_arg(ap, ssize_t), base));
 	else
 	{
 		if (var->type <= TYPE_INT && s_flags->m == 0)
 			ft_flags_stock(var, s_flags, ft_itoa_base(va_arg(ap, int),
-														base));
+												base));
 		else
 			ft_flags_stock(var, s_flags, ft_lltoa_base(va_arg(ap, unsigned int),
-														base));
+												base));
 	}
 }
 

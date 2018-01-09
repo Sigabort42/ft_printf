@@ -6,7 +6,7 @@
 /*   By: elbenkri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/16 07:45:16 by elbenkri          #+#    #+#             */
-/*   Updated: 2018/01/04 08:21:04 by elbenkri         ###   ########.fr       */
+/*   Updated: 2018/01/09 07:24:46 by elbenkri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int		ft_verif_conv(t_var *var, char c)
 {
 	if (c !=  'l' && c != 'h' && c != 'z' && c != 'j' && c != '-' &&
 	    c != '+' && c != '0'&& c != ' ' && c != '#' && c != '.' && c != '%'
-/*&& c != '*'*/ && !ft_strchr(var->flags_conv, c))
+		&& !ft_strchr(var->flags_conv, c))
 	{
 		if (!ft_isdigit(c))
 		{
@@ -62,7 +62,10 @@ int		ft_stock_flags(char *str, t_var *var)
 		if (ft_verif_conv(var, str[i]))
 		{
 			ft_type(var, 'N');
-			return (i + 1);
+			if (!str[i + 1])
+				return (i);
+			else
+				return (i + 1);
 		}
 		var->flags_stock[var->i_stock++] = str[i++];
 		var->flags_stock[var->i_stock] = 0;

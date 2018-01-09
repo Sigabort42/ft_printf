@@ -6,7 +6,7 @@
 /*   By: elbenkri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/20 19:12:01 by elbenkri          #+#    #+#             */
-/*   Updated: 2018/01/08 16:06:07 by elbenkri         ###   ########.fr       */
+/*   Updated: 2018/01/09 07:13:48 by elbenkri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,10 @@ static void	ft_print_buffer2(va_list ap, char *str, t_var *var)
 	}
 	else if (var->type == TYPE_OCTAL)
 		str = ft_ltoa_base(va_arg(ap, unsigned int), 8);
+	else if (var->type == TYPE_NON_CONNU)
+		;
+	else if (var->type == TYPE_MODULO)
+		;
  	else if (var->type <= TYPE_INT)
 		str = ft_itoa(va_arg(ap, int));
 	else if (var->type == TYPE_MODULO)
@@ -43,16 +47,17 @@ static void	ft_print_buffer2(va_list ap, char *str, t_var *var)
 		str = ft_ltoa_base(va_arg(ap, unsigned long), 2);
 	else
 		str = ft_ltoa(va_arg(ap, long long));
-	if (var->type != TYPE_MODULO)
+	if (var->type != TYPE_MODULO && var->type != TYPE_NON_CONNU)
 		ft_memcpy(&var->buf[var->i_buf], str, var->i_buf += ft_strlen(str));
 	free(str);
 }
 
-int		ft_print_buffer(va_list ap, t_var *var)
+int			ft_print_buffer(va_list ap, t_var *var)
 {
 	char	*str;
-	int		i = 0;
+	int		i;
 
+	i = 0;
 	if (var->type == TYPE_STRING || var->type == TYPE_CHAR || var->type == TYPE_WSTRING || var->type == TYPE_WCHAR)
 	{
 		if (var->type == TYPE_WSTRING)
@@ -63,7 +68,7 @@ int		ft_print_buffer(va_list ap, t_var *var)
 			else
 			{
 				while (var->nb.chr2[i])
-					ft_wchar(var->nb.chr2[i++], var, 0);
+					ft_wchar2(var->nb.chr2[i++], var, 0);
 			}
 		}
 		else if (var->type == TYPE_WCHAR)
@@ -71,10 +76,10 @@ int		ft_print_buffer(va_list ap, t_var *var)
 			var->nb.u_i = va_arg(ap, unsigned int);
 			if (var->nb.u_i > 1114111)
 				return (0);
-			ft_wchar((wchar_t)var->nb.u_i, var, 0);
+			ft_wchar2((wchar_t)var->nb.u_i, var, 0);
 		}
 		else if (var->type == TYPE_CHAR)
-		    var->buf[var->i_buf++] = va_arg(ap, int);
+			var->buf[var->i_buf++] = va_arg(ap, int);
 		else if (var->type == TYPE_STRING && !(var->res = va_arg(ap, char *)))
 			ft_memcpy(&var->buf[var->i_buf], "(null)", var->i_buf += 6);
 		else

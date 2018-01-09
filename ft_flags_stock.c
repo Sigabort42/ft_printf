@@ -6,7 +6,7 @@
 /*   By: elbenkri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/22 16:14:24 by elbenkri          #+#    #+#             */
-/*   Updated: 2018/01/08 19:45:17 by elbenkri         ###   ########.fr       */
+/*   Updated: 2018/01/09 08:02:14 by elbenkri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,7 +162,7 @@ void	ft_flags_stock(t_var *var, t_flags *s_flags, char *str_hexa)
 	var->len_str_hexa = ft_strlen(str_hexa);
 	var->i_buf_tmp = 0;
 	var->i_moins = 0;
-	if (s_flags->c == 8 && s_flags->m == 0 && !s_flags->largeur && !s_flags->precision && var->type == TYPE_SHORT && str_hexa[0] != '-')
+	if (s_flags->c == 8 && s_flags->m == 0 && !s_flags->largeur && !s_flags->precision && (var->type == TYPE_SHORT || var->type == TYPE_INT)&& str_hexa[0] != '-')
 		var->buf[var->i_buf++] = ' ';
 	if (s_flags->precision >= s_flags->largeur && s_flags->precision >= var->len_str_hexa)
 	{

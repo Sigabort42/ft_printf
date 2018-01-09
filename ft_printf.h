@@ -6,7 +6,7 @@
 /*   By: elbenkri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/10 17:33:04 by elbenkri          #+#    #+#             */
-/*   Updated: 2018/01/08 19:45:39 by elbenkri         ###   ########.fr       */
+/*   Updated: 2018/01/09 05:55:37 by elbenkri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 # include <stdlib.h>
 # include <stdarg.h>
 # include <stdint.h>
-# include "./libft/libft.h"
+#include "./libft/libft.h"
+#include <stdio.h>
 
 typedef struct		s_color
 {
@@ -122,7 +123,8 @@ int		ft_print_buffer(va_list ap, t_var *var);
 int		ft_flags(char *flags, t_flags *s_flags);
 int		ft_print_flags_buffer(va_list ap, t_var *var, t_flags *s_flags);
 void	ft_flags_stock(t_var *var, t_flags *s_flags, char *str_hexa);
-void	ft_wchar(wchar_t chr, t_var *var, int i);
+char	*ft_wchar(wchar_t chr);
+void	ft_wchar2(wchar_t chr, t_var *var, int i);
 int		ft_wstrlen(wchar_t chr);
 void	ft_conv_envoi(va_list ap, t_var *var, t_flags *s_flags, int base);
 void	ft_conv_envoi_maj(va_list ap, t_var *var, t_flags *s_flags, int base);
