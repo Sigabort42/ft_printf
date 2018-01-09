@@ -6,7 +6,7 @@
 /*   By: elbenkri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/10 17:33:04 by elbenkri          #+#    #+#             */
-/*   Updated: 2018/01/04 04:01:14 by elbenkri         ###   ########.fr       */
+/*   Updated: 2018/01/08 19:45:39 by elbenkri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,7 @@
 # include <stdlib.h>
 # include <stdarg.h>
 # include <stdint.h>
-#include "./libft/libft.h"
-#include <stdio.h>
+# include "./libft/libft.h"
 
 typedef struct		s_color
 {
@@ -119,16 +118,18 @@ char	*ft_ltoa(long n);
 char	*ft_lltoa(unsigned long long n);
 char	*ft_i_maxtoa(intmax_t n);
 char	*ft_ui_maxtoa(uintmax_t n);
-int	ft_print_buffer(va_list ap, t_var *var);
-int		ft_flags(char *flags, t_flags *s_flags, va_list ap);
+int		ft_print_buffer(va_list ap, t_var *var);
+int		ft_flags(char *flags, t_flags *s_flags);
 int		ft_print_flags_buffer(va_list ap, t_var *var, t_flags *s_flags);
 void	ft_flags_stock(t_var *var, t_flags *s_flags, char *str_hexa);
 void	ft_wchar(wchar_t chr, t_var *var, int i);
-int	ft_wstrlen(wchar_t chr);
+int		ft_wstrlen(wchar_t chr);
 void	ft_conv_envoi(va_list ap, t_var *var, t_flags *s_flags, int base);
 void	ft_conv_envoi_maj(va_list ap, t_var *var, t_flags *s_flags, int base);
 void	ft_flags_largeur(t_var *var, t_flags *s_flags, int i);
 void	ft_flags_precision(t_var *var, t_flags *s_flags, int i);
-int	ft_stock_buf_base(t_var *var, t_flags *s_flags, int res_strcmp, int len_str_hexa);
+int		ft_stock_buf_base(t_var *var, t_flags *s_flags, int res_strcmp, int len_str_hexa);
+int		ft_stock_moins(t_var *var, char *str_hexa);
+int		ft_stock_plus(t_var *var, t_flags *s_flags, char *str_hexa);
 
 #endif

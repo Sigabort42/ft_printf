@@ -6,7 +6,7 @@
 /*   By: elbenkri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/16 09:39:57 by elbenkri          #+#    #+#             */
-/*   Updated: 2018/01/04 08:11:33 by elbenkri         ###   ########.fr       */
+/*   Updated: 2018/01/08 17:20:44 by elbenkri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ int		main()
 {
    setlocale(LC_ALL, "");
 
-   printf("\n%d\n", ft_printf("%hhC, %hhC", 0, L'Á±≥'));
-   printf("\n%d\n", printf("%hhC, %hhC", 0, L'Á±≥'));
+   printf("\n%d\n", ft_printf("%+d", 0));
+   printf("\n%d\n", printf("%+d", 0));
    //   printf("\n%d\n", ft_printf("salut %s  toi %C comment tu va", "ouloulou", 1114112));
    //printf("\n%d\n", printf("salut %s  toi %C comment tu va", "ouloulou", 1114112));
    //   printf("\n%d\n", ft_printf("%+lld", 4242424242424242424242));

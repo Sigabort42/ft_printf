@@ -6,7 +6,7 @@
 /*   By: elbenkri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/15 15:56:55 by elbenkri          #+#    #+#             */
-/*   Updated: 2018/01/04 08:07:05 by elbenkri         ###   ########.fr       */
+/*   Updated: 2018/01/08 19:00:35 by elbenkri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ int		ft_printf(const char *format, ...)
 	break;
       if ((var.type == TYPE_WSTRING || var.type == TYPE_WCHAR) && MB_CUR_MAX <= 1)
 	return (-1);
-      (!ft_flags(&var.flags_stock[1], &s_flags, ap)) ? ft_print_buffer(ap, &var) : ft_print_flags_buffer(ap, &var, &s_flags);
+      (!ft_flags(&var.flags_stock[1], &s_flags)) ? ft_print_buffer(ap, &var) : ft_print_flags_buffer(ap, &var, &s_flags);
       var.nb_conv++;
       if (var.nb.u_i > 1114111 && var.type == TYPE_WCHAR)
 	break;

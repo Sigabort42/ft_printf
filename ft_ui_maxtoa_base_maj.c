@@ -6,7 +6,7 @@
 /*   By: elbenkri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/14 12:45:52 by elbenkri          #+#    #+#             */
-/*   Updated: 2018/01/04 03:39:31 by elbenkri         ###   ########.fr       */
+/*   Updated: 2018/01/08 16:41:38 by elbenkri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static int		ft_count(uintmax_t value, int base)
 {
-	int		i;
+	int			i;
 
 	i = 0;
 	while (value > 0)
@@ -27,9 +27,10 @@ static int		ft_count(uintmax_t value, int base)
 
 char			*ft_ui_maxtoa_base_maj(uintmax_t value, int base)
 {
-	char		*res =  NULL;
-	int		i;
+	char		*res;
+	int			i;
 
+	res = NULL;
 	if (base == 10)
 		return (ft_ui_maxtoa(value));
 	i = ft_count(value, base);

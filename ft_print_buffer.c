@@ -6,7 +6,7 @@
 /*   By: elbenkri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/20 19:12:01 by elbenkri          #+#    #+#             */
-/*   Updated: 2018/01/04 07:49:20 by elbenkri         ###   ########.fr       */
+/*   Updated: 2018/01/08 16:06:07 by elbenkri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,21 +57,21 @@ int		ft_print_buffer(va_list ap, t_var *var)
 	{
 		if (var->type == TYPE_WSTRING)
 		{
-		  var->nb.chr2 = (wchar_t*)va_arg(ap, unsigned int*);
-		  if (!var->nb.chr2)
-		    ft_memcpy(&var->buf[var->i_buf], "(null)", var->i_buf += 6);
-		  else
-		  {
-		    while (var->nb.chr2[i])
-		      ft_wchar(var->nb.chr2[i++], var, 0);
-		  }
+			var->nb.chr2 = (wchar_t*)va_arg(ap, unsigned int*);
+			if (!var->nb.chr2)
+				ft_memcpy(&var->buf[var->i_buf], "(null)", var->i_buf += 6);
+			else
+			{
+				while (var->nb.chr2[i])
+					ft_wchar(var->nb.chr2[i++], var, 0);
+			}
 		}
 		else if (var->type == TYPE_WCHAR)
 		{
-		  var->nb.u_i = va_arg(ap, unsigned int);
-		  if (var->nb.u_i > 1114111)
-		    return (0);
-		  ft_wchar((wchar_t)var->nb.u_i, var, 0);
+			var->nb.u_i = va_arg(ap, unsigned int);
+			if (var->nb.u_i > 1114111)
+				return (0);
+			ft_wchar((wchar_t)var->nb.u_i, var, 0);
 		}
 		else if (var->type == TYPE_CHAR)
 		    var->buf[var->i_buf++] = va_arg(ap, int);

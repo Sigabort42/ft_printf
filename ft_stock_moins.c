@@ -1,26 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_wstrlen.c                                       :+:      :+:    :+:   */
+/*   ft_stock_moins.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: elbenkri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/01/08 16:24:48 by elbenkri          #+#    #+#             */
-/*   Updated: 2018/01/08 16:40:13 by elbenkri         ###   ########.fr       */
+/*   Created: 2018/01/08 19:38:09 by elbenkri          #+#    #+#             */
+/*   Updated: 2018/01/08 19:38:57 by elbenkri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_wstrlen(wchar_t chr)
+int		ft_stock_moins(t_var *var, char *str_hexa)
 {
-	if (chr <= 0x7F)
+	if (str_hexa[0] == '-')
+	{
+		var->buf_tmp[var->i_buf_tmp++] = '-';
 		return (1);
-	else if (chr <= 0x7FF)
-		return (2);
-	else if (chr <= 0xFFFF)
-		return (3);
-	else if (chr <= 0x10FFFF)
-		return (4);
+	}
 	return (0);
 }
