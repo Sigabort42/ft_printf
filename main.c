@@ -21,16 +21,13 @@ int		main()
 {
    setlocale(LC_ALL, "");
 
-   printf("\n%d\n", ft_printf("%b\n", "salem djeghbala"));
-//   printf("\n%d\n", ft_printf("%"));
-//   printf("\n%d\n", printf("%"));
-//   printf("\n%d\n", ft_printf("%lX, %lX", 0, ULONG_MAX));
-//   printf("\n%d\n", printf("%lX, %lX", 0, ULONG_MAX));
+   //   printf("\n%d\n", ft_printf("%"));
+   //printf("\n%d\n", printf("%"));
+   printf("\n%d\n", ft_printf("%llx, %llx", 0, ULLONG_MAX));
+   printf("\n%d\n", printf("%llx, %llx", 0, ULLONG_MAX));
+   //   printf("\n%d\n", ft_printf("%lX, %lX", 0, ULONG_MAX));
+   //   printf("\n%d\n", printf("%lX, %lX", 0, ULONG_MAX));
 //   printf("\n%d\n", ft_printf("%jx, %jx", 0, ULLONG_MAX));
 //   printf("\n%d\n", printf("%jx, %jx", 0, ULLONG_MAX));
-//   printf("\n%d\n", ft_printf("%#.x, %#.0x", 0, 0));
-//   printf("\n%d\n", printf("%#.x, %#.0x", 0, 0));   
-//   printf("\n%d\n", ft_printf("{%05.Z}", 0));
-//   printf("\n%d\n", printf("{%05.Z}", 0));   
   return (0);
 }

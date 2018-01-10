@@ -70,6 +70,15 @@ static int	ft_fd(const char *format, t_var *var)
   return (0);
 }
 
+static void		ft_verif(t_var *var)
+{
+	if (!ft_strcmp(var->buf, "cCdDioOuUxXpsSb") && var->i_buf == 15)
+	{
+	  	var->buf[0] = 0;
+		var->i_buf = 0;
+	}
+}
+
 static int		ft_printf2(const char *format, va_list ap, t_var *var)
 {
 	t_flags		s_flags;
@@ -98,6 +107,7 @@ static int		ft_printf2(const char *format, va_list ap, t_var *var)
 		ft_bzero(var->nb.str, 8);
 		ft_bzero(var->flags_stock, 50);
     }
+	ft_verif(var);
 	return (0);
 }
 

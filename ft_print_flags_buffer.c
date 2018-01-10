@@ -79,13 +79,13 @@ static void		ft_print_flags_buffer2(va_list ap, t_var *var, t_flags *s_flags)
 	    var->res = &var->nb.c;
 	    var->res[1] = 0;
 	}
-	else if (var->type == TYPE_CHAR)
+	else if (var->type == TYPE_CHAR && s_flags->m == 0)
 	{
 		var->nb.c = va_arg(ap, int);
 		var->res = &var->nb.c;
 		var->res[1] = 0;
 	}
-	else if (var->type == TYPE_STRING)
+	else if (var->type == TYPE_STRING && s_flags->m == 0)
 		var->res = va_arg(ap, char*);
 	else
 	{

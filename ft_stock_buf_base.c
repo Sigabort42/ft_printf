@@ -26,7 +26,8 @@ int					ft_stock_buf_base(t_var *var, t_flags *s_flags, int res_strcmp, int len_
 	{
 		if (var->i_plus)
 			var->buf[var->i_buf++] = '+';
-		var->buf[var->i_buf++] = '0';
+		if (((!ft_strchr(var->flags_stock, '.') && !s_flags->precision) || (ft_strchr(var->flags_stock, '.') && s_flags->precision)) || (var->type >= TYPE_OCTAL && var->type <= TYPE_OCTAL_MAJ))
+		  var->buf[var->i_buf++] = '0';
 	}
 	else if (((s_flags->c & (1 << 4)) && (var->type >= TYPE_HEXA && var->type <= TYPE_HEXA_MAJ)
 		&& res_strcmp) || var->type == TYPE_ADDRESS)

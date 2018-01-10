@@ -26,7 +26,7 @@ void			ft_flags_precision(t_var *var, t_flags *s_flags, int i)
 {
 	ft_bzero(var->buf_tmp, 500);
 	if (!s_flags->precision && ft_strchr(var->flags_stock, '.') &&
-		var->type != TYPE_MODULO)
+		var->type > TYPE_MODULO)
 		var->res = 0;
 	if (!s_flags->precision && var->res)
 		s_flags->precision = (int)ft_strlen(var->res);
