@@ -5,22 +5,15 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: elbenkri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/12/20 19:12:01 by elbenkri          #+#    #+#             */
-/*   Updated: 2018/01/09 07:13:48 by elbenkri         ###   ########.fr       */
+/*   Created: 2018/01/11 17:30:50 by elbenkri          #+#    #+#             */
+/*   Updated: 2018/01/11 18:03:09 by elbenkri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft/libft.h"
 #include "ft_printf.h"
 
-static void	ft_print_buffer2(va_list ap, char *str, t_var *var)
+static void		ft_print_buffer2(va_list ap, char *str, t_var *var)
 {
-	t_flags	s_flags;
-
-	s_flags.c = 0;
-	s_flags.m = 0;
-	s_flags.largeur = 0;
-	s_flags.precision = 0;
 	if (var->type == TYPE_HEXA || var->type == TYPE_HEXA_MAJ)
 	{
 		if (var->type == TYPE_HEXA)
@@ -30,14 +23,10 @@ static void	ft_print_buffer2(va_list ap, char *str, t_var *var)
 	}
 	else if (var->type == TYPE_OCTAL)
 		str = ft_ltoa_base(va_arg(ap, unsigned int), 8);
-	else if (var->type == TYPE_NON_CONNU)
+	else if (var->type == TYPE_NON_CONNU || var->type == TYPE_MODULO)
 		;
-	else if (var->type == TYPE_MODULO)
-		;
- 	else if (var->type <= TYPE_INT)
+	else if (var->type <= TYPE_INT)
 		str = ft_itoa(va_arg(ap, int));
-	else if (var->type == TYPE_MODULO)
-		var->buf[var->i_buf++] = '%';
 	else if (var->type == TYPE_ADDRESS)
 	{
 		str = ft_ltoa_base(va_arg(ap, unsigned long), 16);
@@ -52,41 +41,44 @@ static void	ft_print_buffer2(va_list ap, char *str, t_var *var)
 	free(str);
 }
 
-int			ft_print_buffer(va_list ap, t_var *var)
+static void		ft_print_buffer3(va_list ap, t_var *var, int i)
 {
-	char	*str;
-	int		i;
-
-	i = 0;
-	if (var->type == TYPE_STRING || var->type == TYPE_CHAR || var->type == TYPE_WSTRING || var->type == TYPE_WCHAR)
+	if (var->type == TYPE_WSTRING)
 	{
-		if (var->type == TYPE_WSTRING)
-		{
-			var->nb.chr2 = (wchar_t*)va_arg(ap, unsigned int*);
-			if (!var->nb.chr2)
-				ft_memcpy(&var->buf[var->i_buf], "(null)", var->i_buf += 6);
-			else
-			{
-				while (var->nb.chr2[i])
-					ft_wchar2(var->nb.chr2[i++], var, 0);
-			}
-		}
-		else if (var->type == TYPE_WCHAR)
-		{
-			var->nb.u_i = va_arg(ap, unsigned int);
-			if (var->nb.u_i > 1114111)
-				return (0);
-			ft_wchar2((wchar_t)var->nb.u_i, var, 0);
-		}
-		else if (var->type == TYPE_CHAR)
-			var->buf[var->i_buf++] = va_arg(ap, int);
-		else if (var->type == TYPE_STRING && !(var->res = va_arg(ap, char *)))
+		var->nb.chr2 = (wchar_t*)va_arg(ap, unsigned int*);
+		if (!var->nb.chr2)
 			ft_memcpy(&var->buf[var->i_buf], "(null)", var->i_buf += 6);
 		else
-			ft_memcpy(&var->buf[var->i_buf], var->res, var->i_buf += ft_strlen(var->res));
+		{
+			while (var->nb.chr2[i])
+				ft_wchar2(var->nb.chr2[i++], var, 0);
+		}
 	}
+	else if (var->type == TYPE_WCHAR)
+	{
+		var->nb.u_i = va_arg(ap, unsigned int);
+		if (var->nb.u_i > 1114111)
+			return ;
+		ft_wchar2((wchar_t)var->nb.u_i, var, 0);
+	}
+	else if (var->type == TYPE_CHAR)
+		var->buf[var->i_buf++] = va_arg(ap, int);
+	else if (var->type == TYPE_STRING && !(var->res = va_arg(ap, char *)))
+		ft_memcpy(&var->buf[var->i_buf], "(null)", var->i_buf += 6);
+	else
+		ft_memcpy(&var->buf[var->i_buf], var->res,
+				var->i_buf += ft_strlen(var->res));
+}
+
+int				ft_print_buffer(va_list ap, t_var *var)
+{
+	char		*str;
+
+	if (var->type == TYPE_STRING || var->type == TYPE_CHAR ||
+		var->type == TYPE_WSTRING || var->type == TYPE_WCHAR)
+		ft_print_buffer3(ap, var, 0);
 	else if (var->type == TYPE_UNSIGNED || var->type == TYPE_UNSIGNED_MAJ
-			 || var->type == TYPE_OCTAL_MAJ)
+			|| var->type == TYPE_OCTAL_MAJ)
 	{
 		if (var->type == TYPE_OCTAL_MAJ)
 			str = ft_lltoa_base(va_arg(ap, unsigned long), 8);

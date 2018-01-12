@@ -6,7 +6,7 @@
 /*   By: elbenkri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/12 06:40:59 by elbenkri          #+#    #+#             */
-/*   Updated: 2018/01/04 03:34:24 by elbenkri         ###   ########.fr       */
+/*   Updated: 2018/01/11 15:57:56 by elbenkri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static char	*ft_print(char *str, intmax_t n, int *i)
 	return (str);
 }
 
-char		*ft_lol()
+char		*ft_lol(void)
 {
 	return (ft_strdup("-9223372036854775808"));
 }

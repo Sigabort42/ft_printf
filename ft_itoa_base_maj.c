@@ -6,7 +6,7 @@
 /*   By: elbenkri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/14 12:45:52 by elbenkri          #+#    #+#             */
-/*   Updated: 2017/12/28 13:32:00 by elbenkri         ###   ########.fr       */
+/*   Updated: 2018/01/11 16:01:16 by elbenkri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static int		ft_count(int value, int base)
 char			*ft_itoa_base_maj(int value, int base)
 {
 	char		*res;
-	int		i;
+	int			i;
 
 	res = NULL;
 	if (base == 10)

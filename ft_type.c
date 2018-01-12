@@ -6,11 +6,31 @@
 /*   By: elbenkri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/16 07:43:17 by elbenkri          #+#    #+#             */
-/*   Updated: 2017/12/19 18:53:11 by elbenkri         ###   ########.fr       */
+/*   Updated: 2018/01/11 23:16:23 by elbenkri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+
+void	ft_type2(t_var *var, char c)
+{
+	if (c == 'o')
+		var->type = TYPE_OCTAL;
+	else if (c == 'O')
+		var->type = TYPE_OCTAL_MAJ;
+	else if (c == 'u')
+		var->type = TYPE_UNSIGNED;
+	else if (c == 'U')
+		var->type = TYPE_UNSIGNED_MAJ;
+	else if (c == '%')
+		var->type = TYPE_MODULO;
+	else if (c == 'b')
+		var->type = TYPE_BITWISE;
+	else if (c == 'S')
+		var->type = TYPE_WSTRING;
+	else if (c == 'N')
+		var->type = TYPE_NON_CONNU;
+}
 
 void	ft_type(t_var *var, char c)
 {
@@ -32,20 +52,6 @@ void	ft_type(t_var *var, char c)
 		var->type = TYPE_HEXA_MAJ;
 	else if (c == 'p')
 		var->type = TYPE_ADDRESS;
-	else if (c == 'o')
-		var->type = TYPE_OCTAL;
-	else if (c == 'O')
-		var->type = TYPE_OCTAL_MAJ;
-	else if (c == 'u')
-		var->type = TYPE_UNSIGNED;
-	else if (c == 'U')
-		var->type = TYPE_UNSIGNED_MAJ;
-	else if (c == '%')
-		var->type = TYPE_MODULO;
-	else if (c == 'b')
-		var->type = TYPE_BITWISE;
-	else if (c == 'S')
-		var->type = TYPE_WSTRING;
-	else if (c == 'N')
-		var->type = TYPE_NON_CONNU;
+	else
+		ft_type2(var, c);
 }

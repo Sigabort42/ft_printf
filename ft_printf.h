@@ -6,7 +6,7 @@
 /*   By: elbenkri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/10 17:33:04 by elbenkri          #+#    #+#             */
-/*   Updated: 2018/01/09 05:55:37 by elbenkri         ###   ########.fr       */
+/*   Updated: 2018/01/11 20:17:59 by elbenkri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,13 @@
 # include <stdlib.h>
 # include <stdarg.h>
 # include <stdint.h>
-#include "./libft/libft.h"
-#include <stdio.h>
+# include "./libft/libft.h"
 
-typedef struct		s_color
+typedef struct			s_color
 {
-  char                  *color;
-  char                  *unicode;
-}			t_color;
+	char				*color;
+	char				*unicode;
+}						t_color;
 
 typedef union			u_var_nb
 {
@@ -42,8 +41,8 @@ typedef union			u_var_nb
 	long				l;
 	unsigned long		u_l;
 	long long			ll_i;
-	unsigned long long		ll;
-	void					*ptr;
+	unsigned long long	ll;
+	void				*ptr;
 }						t_uvar_nb;
 
 enum
@@ -69,69 +68,87 @@ enum
 	TYPE_BITWISE,
 };
 
-typedef struct	s_var
+typedef struct			s_var
 {
-	char		*res;
-	char		buf[500];
-	char		buf_tmp[500];
-	char		flags_stock[50];
-	char		flags_conv[15];
-	int			ret;
-	int			i_buf;
-	int			i_buf_tmp;
-	int			i_stock;
-	t_uvar_nb	nb;
-	int			type;
-	int			i_plus;
-	int			i_moins;
-	int			i_stock_buf;
-	int			len_str_hexa;
-	int			res_strcmp;
-	int			k;
-	int			fd;
-	int			nb_conv;
-	int			res2;
-}				t_var;
+	char				*res;
+	char				buf[500];
+	char				buf_tmp[500];
+	char				flags_stock[50];
+	char				flags_conv[15];
+	int					ret;
+	int					i_buf;
+	int					i_buf_tmp;
+	int					i_stock;
+	t_uvar_nb			nb;
+	int					type;
+	int					i_plus;
+	int					i_moins;
+	int					i_stock_buf;
+	int					len_str_hexa;
+	int					res_strcmp;
+	int					k;
+	int					fd;
+	int					nb_conv;
+	int					res2;
+}						t_var;
 
-typedef struct	s_flags
+typedef struct			s_flags
 {
-	char		c;
-	int			largeur;
-	int			precision;
-	char		m;
-}				t_flags;
+	char				c;
+	int					largeur;
+	int					precision;
+	char				m;
+}						t_flags;
 
-int		ft_printf(const char *format, ...);
-int		ft_is_number(long long nb);
-char	*ft_itoa_base(int value, int base);
-char	*ft_itoa_base_maj(int value, int base);
-char	*ft_ltoa_base(long value, int base);
-char	*ft_ltoa_base_maj(long value, int base);
-char	*ft_lltoa_base(unsigned long long value, int base);
-char	*ft_lltoa_base_maj(unsigned long long value, int base);
-char	*ft_i_maxtoa_base(intmax_t value, int base);
-char	*ft_i_maxtoa_base_maj(intmax_t value, int base);
-char	*ft_ui_maxtoa_base(uintmax_t value, int base);
-char	*ft_ui_maxtoa_base_maj(uintmax_t value, int base);
-void	ft_type(t_var *var, char c);
-int		ft_stock_flags(char *str, t_var *var);
-char	*ft_ltoa(long n);
-char	*ft_lltoa(unsigned long long n);
-char	*ft_i_maxtoa(intmax_t n);
-char	*ft_ui_maxtoa(uintmax_t n);
-int		ft_print_buffer(va_list ap, t_var *var);
-int		ft_flags(char *flags, t_flags *s_flags);
-int		ft_print_flags_buffer(va_list ap, t_var *var, t_flags *s_flags);
-void	ft_flags_stock(t_var *var, t_flags *s_flags, char *str_hexa);
-char	*ft_wchar(wchar_t chr);
-void	ft_wchar2(wchar_t chr, t_var *var, int i);
-int		ft_wstrlen(wchar_t chr);
-void	ft_conv_envoi(va_list ap, t_var *var, t_flags *s_flags, int base);
-void	ft_conv_envoi_maj(va_list ap, t_var *var, t_flags *s_flags, int base);
-void	ft_flags_largeur(t_var *var, t_flags *s_flags, int i);
-void	ft_flags_precision(t_var *var, t_flags *s_flags, int i);
-int		ft_stock_buf_base(t_var *var, t_flags *s_flags, int res_strcmp, int len_str_hexa);
-int		ft_stock_moins(t_var *var, char *str_hexa);
-int		ft_stock_plus(t_var *var, t_flags *s_flags, char *str_hexa);
+int						ft_printf(const char *format, ...);
+int						ft_is_number(long long nb);
+char					*ft_itoa_base(int value, int base);
+char					*ft_itoa_base_maj(int value, int base);
+char					*ft_ltoa_base(long value, int base);
+char					*ft_ltoa_base_maj(long value, int base);
+char					*ft_lltoa_base(unsigned long long value, int base);
+char					*ft_lltoa_base_maj(unsigned long long value, int base);
+char					*ft_i_maxtoa_base(intmax_t value, int base);
+char					*ft_i_maxtoa_base_maj(intmax_t value, int base);
+char					*ft_ui_maxtoa_base(uintmax_t value, int base);
+char					*ft_ui_maxtoa_base_maj(uintmax_t value, int base);
+void					ft_type(t_var *var, char c);
+int						ft_stock_flags(char *str, t_var *var);
+char					*ft_ltoa(long n);
+char					*ft_lltoa(unsigned long long n);
+char					*ft_i_maxtoa(intmax_t n);
+char					*ft_ui_maxtoa(uintmax_t n);
+int						ft_print_buffer(va_list ap, t_var *var);
+int						ft_flags(char *flags, t_flags *s_flags);
+int						ft_print_flags_buffer(va_list ap, t_var *var,
+										t_flags *s_flags);
+void					ft_flags_stock(t_var *var, t_flags *s_flags,
+								char *str_hexa);
+char					*ft_wchar(wchar_t chr);
+void					ft_wchar2(wchar_t chr, t_var *var, int i);
+int						ft_wstrlen(wchar_t chr);
+void					ft_conv_envoi(va_list ap, t_var *var, t_flags *s_flags,
+										int base);
+void					ft_conv_envoi_maj(va_list ap, t_var *var,
+											t_flags *s_flags, int base);
+void					ft_flags_largeur(t_var *var, t_flags *s_flags,
+											int i);
+void					ft_flags_precision(t_var *var, t_flags *s_flags, int i);
+int						ft_stock_buf_base(t_var *var, t_flags *s_flags,
+										int res_strcmp, int len_str_hexa);
+int						ft_stock_moins(t_var *var, char *str_hexa);
+int						ft_stock_plus(t_var *var, t_flags *s_flags,
+										char *str_hexa);
+void					ft_flags_stock2_1(t_var *var, t_flags *s_flags,
+											char *str_hexa);
+void					ft_flags_stock2_21(t_var *var, t_flags *s_flags,
+											char *str_hexa);
+void					ft_flags_stock2_2(t_var *var, t_flags *s_flags,
+											char *str_hexa);
+void					ft_flags_stock2_4(t_var *var, t_flags *s_flags,
+											char *str_hexa);
+void					ft_flags_stock2_5(t_var *var, t_flags *s_flags,
+											char *str_hexa);
+void					ft_verif_buf(t_var *var, const char *format);
 
 #endif

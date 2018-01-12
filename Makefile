@@ -6,7 +6,7 @@
 #    By: elbenkri <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/12/10 17:33:59 by elbenkri          #+#    #+#              #
-#    Updated: 2018/01/08 19:50:19 by elbenkri         ###   ########.fr        #
+#    Updated: 2018/01/11 18:27:20 by elbenkri         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -50,6 +50,8 @@ SRCS	=	ft_is_number.c \
 			ft_stock_buf_base.c \
 			ft_stock_moins.c \
 			ft_stock_plus.c \
+			ft_flags_stock2.c \
+			ft_verif_buf.c \
 
 OBJS	=	$(SRCS:.c=.o)
 

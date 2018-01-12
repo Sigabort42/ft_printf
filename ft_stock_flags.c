@@ -6,17 +6,17 @@
 /*   By: elbenkri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/16 07:45:16 by elbenkri          #+#    #+#             */
-/*   Updated: 2018/01/09 07:24:46 by elbenkri         ###   ########.fr       */
+/*   Updated: 2018/01/11 23:11:24 by elbenkri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft/libft.h"
 #include "ft_printf.h"
 
-int		ft_verif_conv(t_var *var, char c)
+int				ft_verif_conv(t_var *var, char c)
 {
-	if (c !=  'l' && c != 'h' && c != 'z' && c != 'j' && c != '-' &&
-	    c != '+' && c != '0'&& c != ' ' && c != '#' && c != '.' && c != '%'
+	if (c != 'l' && c != 'h' && c != 'z' && c != 'j' && c != '-' &&
+		c != '+' && c != '0' && c != ' ' && c != '#' && c != '.' && c != '%'
 		&& !ft_strchr(var->flags_conv, c))
 	{
 		if (!ft_isdigit(c))
@@ -29,7 +29,7 @@ int		ft_verif_conv(t_var *var, char c)
 	return (0);
 }
 
-static int	ft_stock_flags2(char *str, t_var *var, int *i)
+static int		ft_stock_flags2(char *str, t_var *var, int *i)
 {
 	if (!str[*i] || str[*i] == '%')
 	{
@@ -42,10 +42,26 @@ static int	ft_stock_flags2(char *str, t_var *var, int *i)
 	return (0);
 }
 
-int		ft_stock_flags(char *str, t_var *var)
+int				ft_stock_flags3(char *str, t_var *var, int *i)
 {
-	int		i;
-	int		j;
+	if (ft_verif_conv(var, str[*i]))
+	{
+		ft_type(var, 'N');
+		if (!str[*i + 1])
+			return (*i);
+		else
+		{
+			*i = *i + 1;
+			return (*i);
+		}
+	}
+	return (0);
+}
+
+int				ft_stock_flags(char *str, t_var *var)
+{
+	int			i;
+	int			j;
 
 	i = 0;
 	j = 0;
@@ -59,14 +75,8 @@ int		ft_stock_flags(char *str, t_var *var)
 		if (var->flags_conv[j] == str[i])
 			return (i + 1);
 		j = 0;
-		if (ft_verif_conv(var, str[i]))
-		{
-			ft_type(var, 'N');
-			if (!str[i + 1])
-				return (i);
-			else
-				return (i + 1);
-		}
+		if (ft_stock_flags3(str, var, &i))
+			return (i);
 		var->flags_stock[var->i_stock++] = str[i++];
 		var->flags_stock[var->i_stock] = 0;
 		if (ft_stock_flags2(str, var, &i))
