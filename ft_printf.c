@@ -6,7 +6,7 @@
 /*   By: elbenkri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/15 15:56:55 by elbenkri          #+#    #+#             */
-/*   Updated: 2018/01/11 18:25:59 by elbenkri         ###   ########.fr       */
+/*   Updated: 2018/01/12 04:59:48 by elbenkri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,6 @@ int					ft_printf(const char *format, ...)
 	var.nb_conv = 0;
 	ft_bzero(var.buf, 500);
 	ft_strcpy(var.flags_conv, "cCdDioOuUxXpsSb");
-	va_end(ap);
 	if (ft_printf2(format, ap, &var) == -1)
 		return (-1);
 	if (var.type == TYPE_WCHAR && !var.nb_conv)
@@ -134,6 +133,7 @@ int					ft_printf(const char *format, ...)
 		write(var.fd, var.buf, var.i_buf);
 		return (-1);
 	}
+	va_end(ap);
 	write(var.fd, var.buf, var.i_buf);
 	return (var.i_buf);
 }

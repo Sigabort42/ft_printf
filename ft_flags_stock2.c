@@ -6,10 +6,11 @@
 /*   By: elbenkri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 15:22:39 by elbenkri          #+#    #+#             */
-/*   Updated: 2018/01/11 15:56:27 by elbenkri         ###   ########.fr       */
+/*   Updated: 2018/01/12 05:21:24 by elbenkri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdio.h>
 #include "ft_printf.h"
 
 void	ft_flags_stock2_5(t_var *var, t_flags *s_flags, char *str_hexa)
@@ -24,21 +25,21 @@ void	ft_flags_stock2_5(t_var *var, t_flags *s_flags, char *str_hexa)
 		var->k = s_flags->largeur - s_flags->precision - var->len_str_hexa;
 	else
 		var->k = s_flags->largeur - s_flags->precision;
-	ft_memset(&var->buf_tmp[var->i_buf_tmp], ' ', var->k);
-	var->i_buf_tmp += var->k;
+	(var->k < 0) ? var->k = 0 : 0;
+	ft_memset(&var->buf_tmp[var->i_buf_tmp], ' ', var->i_buf_tmp += var->k);
 	(var->type == TYPE_ADDRESS) ?
 		ft_memcpy(&var->buf_tmp[var->i_buf_tmp], "0x", var->i_buf_tmp += 2) : 0;
-	if (!(!var->res_strcmp && var->len_str_hexa == 1 && s_flags->m == 0))
+	if (!(!var->res_strcmp && s_flags->m == 0))
 		ft_memcpy(&var->buf_tmp[var->i_buf_tmp], str_hexa,
 				var->i_buf_tmp += var->len_str_hexa);
 	else if (var->type == TYPE_ADDRESS && !var->res_strcmp)
 		ft_memcpy(&var->buf_tmp[var->i_buf_tmp], str_hexa,
 				var->i_buf_tmp += var->len_str_hexa);
 	(var->type == TYPE_ADDRESS) ?
-		ft_memcpy(&var->buf[var->i_buf], var->buf_tmp, var->i_buf_tmp) :
 		ft_memcpy(&var->buf[var->i_buf], var->buf_tmp,
-				var->i_buf_tmp + var->len_str_hexa);
-	var->i_buf += s_flags->largeur;
+				var->i_buf_tmp) : ft_memcpy(&var->buf[var->i_buf], var->buf_tmp,
+											var->i_buf_tmp + var->len_str_hexa);
+	var->i_buf += var->i_buf_tmp;
 }
 
 void	ft_flags_stock2_4(t_var *var, t_flags *s_flags, char *str_hexa)
