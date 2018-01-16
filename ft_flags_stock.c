@@ -18,6 +18,7 @@ static void		ft_flags_stock5(t_var *var, t_flags *s_flags, char *str_hexa)
 	{
 		var->k = s_flags->largeur - var->len_str_hexa -
 			ft_stock_buf_base(var, s_flags, var->res_strcmp, var->len_str_hexa);
+		(var->k < 0) ? var->k = 0 : 0;
 		ft_memset(&var->buf_tmp[0], ' ', var->k);
 		var->i_buf_tmp = var->k;
 		ft_stock_buf_base(var, s_flags, var->res_strcmp, var->len_str_hexa);
@@ -106,11 +107,11 @@ void			ft_flags_stock(t_var *var, t_flags *s_flags, char *str_hexa)
 	var->i_buf_tmp = 0;
 	var->i_moins = 0;
 	if (s_flags->c == 8 && s_flags->m == 0 && !s_flags->largeur &&
-		!s_flags->precision && (var->type == TYPE_SHORT ||
-							var->type == TYPE_INT) && str_hexa[0] != '-')
+	    !s_flags->precision && (var->type == TYPE_SHORT ||
+				    var->type == TYPE_INT) && str_hexa[0] != '-')
 		var->buf[var->i_buf++] = ' ';
 	if (s_flags->precision >= s_flags->largeur && s_flags->precision >=
-			var->len_str_hexa)
+	    var->len_str_hexa)
 		ft_flags_stock2_1(var, s_flags, str_hexa);
 	else
 		ft_flags_stock2(var, s_flags, str_hexa);

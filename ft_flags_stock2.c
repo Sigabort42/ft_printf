@@ -26,6 +26,7 @@ void	ft_flags_stock2_5(t_var *var, t_flags *s_flags, char *str_hexa)
 	else
 		var->k = s_flags->largeur - s_flags->precision;
 	(var->k < 0) ? var->k = 0 : 0;
+//	(!var->res_strcmp && !var->i_buf && s_flags->m) ? var->k-- : 0;
 	ft_memset(&var->buf_tmp[var->i_buf_tmp], ' ', var->i_buf_tmp += var->k);
 	(var->type == TYPE_ADDRESS) ?
 		ft_memcpy(&var->buf_tmp[var->i_buf_tmp], "0x", var->i_buf_tmp += 2) : 0;

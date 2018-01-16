@@ -67,13 +67,13 @@ $(NAME): $(OBJS)
 
 clean:
 	@make -C libft/ clean
-	rm -rf $(OBJS)
-	rm -rf $(NAME_TMP)
+	@rm -rf $(OBJS)
+	@rm -rf $(NAME_TMP)
 	@echo "\033[H\033[2J\033[32;5m[OK...]"
 
 fclean:	clean
 	@make -C libft/ fclean
-	rm -rf $(NAME)
+	@rm -rf $(NAME)
 	@echo "\033[H\033[2J\033[32;5m[OK...]"
 
 re: fclean all
