@@ -104,6 +104,7 @@ static int			ft_printf2(const char *format, va_list ap, t_var *var)
 			break ;
 		ft_bzero(var->nb.str, 8);
 		ft_bzero(var->flags_stock, 50);
+		ft_bzero(var->buf_tmp, 500);
 	}
 	ft_verif(var);
 	return (0);

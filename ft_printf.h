@@ -135,7 +135,7 @@ void					ft_flags_largeur(t_var *var, t_flags *s_flags,
 											int i);
 void					ft_flags_precision(t_var *var, t_flags *s_flags, int i);
 int						ft_stock_buf_base(t_var *var, t_flags *s_flags,
-										int res_strcmp, int len_str_hexa);
+										int res_strcmp);
 int						ft_stock_moins(t_var *var, char *str_hexa);
 int						ft_stock_plus(t_var *var, t_flags *s_flags,
 										char *str_hexa);
