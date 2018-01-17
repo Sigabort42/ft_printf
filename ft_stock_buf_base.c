@@ -13,16 +13,15 @@
 #include <stdio.h>
 #include "ft_printf.h"
 
-static int			ft_stock_buf_base2(t_var *var, t_flags *s_flags,
-						   int res_strcmp)
+static int	ft_stock_buf_base2(t_var *var, t_flags *s_flags, int res_strcmp)
 {
-	int				i;
+	int	i;
+	int	o;
 
 	i = 0;
-//	printf("lol\n");
-	if ((s_flags->c & (1 << 4)) && (var->type >= TYPE_OCTAL && var->type <=
-					TYPE_OCTAL_MAJ) && res_strcmp && !s_flags->precision)// &&
-//	!ft_strchr(var->flags_stock, '.'))
+	o = (var->type >= TYPE_OCTAL && var->type <= TYPE_OCTAL_MAJ);
+	if ((s_flags->c & (1 << 4)) && o && ((res_strcmp && !s_flags->precision 
+&& ft_strchr(var->flags_stock, '.')) || !ft_strchr(var->flags_stock, '.')))
 	{
 		i = 1;
 		ft_memcpy(&var->buf_tmp[var->i_buf_tmp], "0", i);
@@ -31,11 +30,11 @@ static int			ft_stock_buf_base2(t_var *var, t_flags *s_flags,
 	return (i);
 }
 
-void				ft_stock_buf_base3(t_var *var, t_flags *s_flags)
+void		ft_stock_buf_base3(t_var *var, t_flags *s_flags)
 {
-	int			i;
-	int			x;
-	int			x2;
+	int	i;
+	int	x;
+	int	x2;
 
 	x = (var->type >= TYPE_OCTAL && var->type <= TYPE_OCTAL_MAJ);
 	x2 = s_flags->largeur - s_flags->precision;
@@ -48,10 +47,9 @@ void				ft_stock_buf_base3(t_var *var, t_flags *s_flags)
 		var->buf[var->i_buf++] = '0';
 }
 
-int					ft_stock_buf_base(t_var *var, t_flags *s_flags,
-							  int res_strcmp)
+int		ft_stock_buf_base(t_var *var, t_flags *s_flags, int res_strcmp)
 {
-	int				i;
+	int	i;
 
 	i = 0;
 	if (!res_strcmp && s_flags->m == 0 && s_flags->c >= 2 &&

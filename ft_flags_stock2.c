@@ -54,6 +54,7 @@ void	ft_flags_stock2_4(t_var *var, t_flags *s_flags, char *str_hexa)
 	int	i;
 
 	i = 0;
+//	ft_putstr("lol\n");
 	var->i_moins = ft_stock_moins(var, str_hexa);
 	var->i_plus = ft_stock_plus(var, s_flags, str_hexa);
 	if (s_flags->c & (1 << 3) && (var->type == TYPE_SHORT ||
