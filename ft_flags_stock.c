@@ -52,7 +52,7 @@ static void		ft_flags_stock4(t_var *var, t_flags *s_flags, char *str_hexa)
 			  var->len_str_hexa);
 		var->i_buf += var->i_buf_tmp;
 	}
-	else if ((s_flags->c & (1 << 0)))
+	else if ((s_flags->c & (1 << 0)) && !ft_strchr(var->flags_stock, '.'))
 		ft_flags_stock2_4(var, s_flags, str_hexa);
 	else
 		ft_flags_stock5(var, s_flags, str_hexa);
