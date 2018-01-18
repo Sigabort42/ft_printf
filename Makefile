@@ -52,6 +52,10 @@ SRCS	=	ft_is_number.c \
 			ft_stock_plus.c \
 			ft_flags_stock2.c \
 			ft_verif_buf.c \
+			ft_verif_address.c \
+			ft_verif_flags_stock2_4.c \
+			ft_split2_2.c \
+			ft_split2_5.c \
 
 OBJS	=	$(SRCS:.c=.o)
 

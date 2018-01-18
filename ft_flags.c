@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include <stdio.h>
 
 static void			ft_verif_modificateur(char *mod, t_flags *s_flags)
 {

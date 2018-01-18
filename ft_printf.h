@@ -150,5 +150,9 @@ void					ft_flags_stock2_4(t_var *var, t_flags *s_flags,
 void					ft_flags_stock2_5(t_var *var, t_flags *s_flags,
 											char *str_hexa);
 void					ft_verif_buf(t_var *var, const char *format);
+int					ft_verif_address(t_var *var);
+int					ft_verif_flags_stock2_4(t_flags *s_flags, t_var *var);
+void					ft_split2_2(t_flags *s_flags, t_var *var, char *str_hexa);
+void					ft_split2_5(t_flags *s_flags, t_var *var);
 
 #endif

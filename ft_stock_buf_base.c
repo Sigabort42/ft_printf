@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include "ft_printf.h"
 
 static int	ft_stock_buf_base2(t_var *var, t_flags *s_flags, int res_strcmp)
@@ -44,7 +43,10 @@ void		ft_stock_buf_base3(t_var *var, t_flags *s_flags)
 	if (((!ft_strchr(var->flags_stock, '.') && !s_flags->precision && !x) ||
 	(x && s_flags->c < 16) || (ft_strchr(var->flags_stock, '.') &&
 				   s_flags->precision && x2 > var->len_str_hexa)))
-		var->buf[var->i_buf++] = '0';
+	{
+		if (!ft_strchr(var->flags_stock, '.'))
+			var->buf[var->i_buf++] = '0';
+	}
 }
 
 int		ft_stock_buf_base(t_var *var, t_flags *s_flags, int res_strcmp)

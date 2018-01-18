@@ -33,20 +33,23 @@ static int			ft_color(const char *format, t_var *var)
 	if (ft_strnequ("{eoc}", &format[0], 5))
 	{
 		ft_memcpy(&var->buf[var->i_buf], reset_color,
-				var->i_buf += ft_strlen(reset_color));
+			  var->i_buf += ft_strlen(reset_color));
 		var->ret += 5;
 	}
-	while (g_color[i].color)
+	if (ft_strstr(format, "{eoc}"))
 	{
-		if (ft_strnequ(g_color[i].color, &format[0],
-				ft_strlen(g_color[i].color)))
+		while (g_color[i].color)
 		{
-			ft_memcpy(&var->buf[var->i_buf], g_color[i].unicode,
-					var->i_buf += ft_strlen(g_color[i].unicode));
-			var->ret += ft_strlen(g_color[i].color);
-			return (0);
+			if (ft_strnequ(g_color[i].color, &format[0],
+				       ft_strlen(g_color[i].color)))
+			{
+				ft_memcpy(&var->buf[var->i_buf], g_color[i].unicode,
+					  var->i_buf += ft_strlen(g_color[i].unicode));
+				var->ret += ft_strlen(g_color[i].color);
+				return (0);
+			}
+			i++;
 		}
-		i++;
 	}
 	return (0);
 }
@@ -103,7 +106,7 @@ static int			ft_printf2(const char *format, va_list ap, t_var *var)
 		if (var->nb.u_i > 1114111 && var->type == TYPE_WCHAR)
 			break ;
 		ft_bzero(var->nb.str, 8);
-		ft_bzero(var->flags_stock, 50);
+		var->flags_stock[0] = 0;
 	}
 	ft_verif(var);
 	return (0);
@@ -118,7 +121,6 @@ int					ft_printf(const char *format, ...)
 	var.ret = 0;
 	var.i_buf = 0;
 	var.nb_conv = 0;
-	ft_bzero(var.buf, 500);
 	ft_strcpy(var.flags_conv, "cCdDioOuUxXpsSb");
 	if (ft_printf2(format, ap, &var) == -1)
 		return (-1);

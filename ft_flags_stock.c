@@ -12,7 +12,7 @@
 
 #include "ft_printf.h"
 
-static void		ft_flags_stock5(t_var *var, t_flags *s_flags, char *str_hexa)
+static void	ft_flags_stock5(t_var *var, t_flags *s_flags, char *str_hexa)
 {
 	if ((s_flags->c & (1 << 4)))
 	{
@@ -22,7 +22,8 @@ static void		ft_flags_stock5(t_var *var, t_flags *s_flags, char *str_hexa)
 		ft_memset(&var->buf_tmp[0], ' ', var->k);
 		var->i_buf_tmp = var->k;
 		ft_stock_buf_base(var, s_flags, var->res_strcmp);
-		ft_memcpy(&var->buf_tmp[var->i_buf_tmp], str_hexa, var->len_str_hexa);
+		ft_memcpy(&var->buf_tmp[var->i_buf_tmp], str_hexa,
+			var->len_str_hexa);
 		var->i_buf_tmp += var->len_str_hexa;
 		ft_memcpy(&var->buf[var->i_buf], var->buf_tmp,
 				var->i_buf_tmp + var->len_str_hexa);
@@ -32,16 +33,17 @@ static void		ft_flags_stock5(t_var *var, t_flags *s_flags, char *str_hexa)
 		ft_flags_stock2_5(var, s_flags, str_hexa);
 }
 
-static void		ft_flags_stock4(t_var *var, t_flags *s_flags, char *str_hexa)
+static void	ft_flags_stock4(t_var *var, t_flags *s_flags, char *str_hexa)
 {
 	if ((s_flags->c & (1 << 2)))
 	{
 		var->i_stock_buf = ft_stock_buf_base(var, s_flags,
 						     var->res_strcmp);
-		ft_memcpy(&var->buf_tmp[var->i_buf_tmp], str_hexa, var->len_str_hexa);
+		ft_memcpy(&var->buf_tmp[var->i_buf_tmp], str_hexa,
+			var->len_str_hexa);
 		var->i_buf_tmp += var->len_str_hexa;
-		var->k = s_flags->largeur - s_flags->precision - var->len_str_hexa -
-			var->i_stock_buf;
+		var->k = s_flags->largeur - s_flags->precision -
+			var->len_str_hexa - var->i_stock_buf;
 		if (var->k < 0)
 			var->k = 0;
 		if (var->type == TYPE_BITWISE)
@@ -58,7 +60,7 @@ static void		ft_flags_stock4(t_var *var, t_flags *s_flags, char *str_hexa)
 		ft_flags_stock5(var, s_flags, str_hexa);
 }
 
-static void		ft_flags_stock3(t_var *var, t_flags *s_flags, char *str_hexa)
+static void	ft_flags_stock3(t_var *var, t_flags *s_flags, char *str_hexa)
 {
 	if (s_flags->largeur < var->len_str_hexa)
 	{
@@ -66,24 +68,20 @@ static void		ft_flags_stock3(t_var *var, t_flags *s_flags, char *str_hexa)
 		ft_stock_buf_base(var, s_flags, var->res_strcmp);
 		if (!var->res_strcmp && s_flags->m == 0 && s_flags->c <= 16)
 		{
-			if (var->type == TYPE_ADDRESS)
-			{
-				ft_memcpy(&var->buf[var->i_buf], var->buf_tmp, var->i_buf_tmp);
-				var->i_buf += var->i_buf_tmp;
+			if (ft_verif_address(var))
 				return ;
-			}
 			else if ((s_flags->c >= 8) && (var->type == TYPE_SHORT ||
 			var->type == TYPE_INT || (var->type == TYPE_OCTAL ||
-						  var->type == TYPE_OCTAL_MAJ)))
-				ft_memcpy(&var->buf_tmp[var->i_buf_tmp], str_hexa,
-					  var->i_buf_tmp += var->len_str_hexa);
-			if (!var->i_plus)
-				ft_memcpy(&var->buf[var->i_buf], var->buf_tmp, var->i_buf +=
-					  var->i_buf_tmp);
+			var->type == TYPE_OCTAL_MAJ)))
+				ft_memcpy(&var->buf_tmp[var->i_buf_tmp],
+				str_hexa, var->i_buf_tmp += var->len_str_hexa);
+			if (!var->i_plus || var->type == TYPE_INT)
+				ft_memcpy(&var->buf[var->i_buf], var->buf_tmp,
+					var->i_buf += var->i_buf_tmp);
 			return ;
 		}
-		ft_memcpy(&var->buf_tmp[var->i_buf_tmp], str_hexa, var->i_buf_tmp +=
-			  var->len_str_hexa);
+		ft_memcpy(&var->buf_tmp[var->i_buf_tmp], str_hexa,
+			var->i_buf_tmp += var->len_str_hexa);
 		ft_memcpy(&var->buf[var->i_buf], var->buf_tmp, var->i_buf_tmp);
 		var->i_buf += var->i_buf_tmp;
 	}
