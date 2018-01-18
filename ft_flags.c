@@ -6,7 +6,7 @@
 /*   By: elbenkri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/21 14:47:50 by elbenkri          #+#    #+#             */
-/*   Updated: 2018/01/08 18:59:47 by elbenkri         ###   ########.fr       */
+/*   Updated: 2018/01/18 15:23:25 by elbenkri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int					ft_flags(char *flags, t_flags *s_flags)
 		return (0);
 	s_flags->c = 0;
 	while (flags[i] && (!(flags[i] >= '1' && flags[i] <= '9')) &&
-	       flags[i] != '.' && ft_verif_mod(flags[i]))
+		flags[i] != '.' && ft_verif_mod(flags[i]))
 	{
 		if (flags[i] == '0')
 			s_flags->c = s_flags->c | (1 << 0);
