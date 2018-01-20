@@ -6,7 +6,7 @@
 /*   By: elbenkri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 15:22:39 by elbenkri          #+#    #+#             */
-/*   Updated: 2018/01/18 15:30:29 by elbenkri         ###   ########.fr       */
+/*   Updated: 2018/01/20 20:21:00 by elbenkri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ void	ft_flags_stock2_4(t_var *var, t_flags *s_flags, char *str_hexa)
 	i = ft_verif_flags_stock2_4(s_flags, var);
 	var->k = s_flags->largeur - s_flags->precision - var->len_str_hexa -
 	ft_stock_buf_base(var, s_flags, var->res_strcmp) - var->i_plus - i;
+	(var->k < 0) ? var->k = 0 : 0;
 	if (var->type == TYPE_BITWISE)
 		var->k = s_flags->largeur - var->len_str_hexa;
 	if (!ft_strchr(var->flags_stock, '.'))
@@ -103,6 +104,7 @@ void	ft_flags_stock2_21(t_var *var, t_flags *s_flags, char *str_hexa)
 {
 	var->i_plus = ft_stock_plus(var, s_flags, str_hexa);
 	var->k = s_flags->precision - var->len_str_hexa;
+	(var->k < 0) ? var->k = 0 : 0;
 	ft_memset(&var->buf_tmp[var->i_buf_tmp], '0', var->k);
 	var->i_buf_tmp += var->k;
 	ft_memcpy(&var->buf_tmp[var->i_buf_tmp], str_hexa,
@@ -126,6 +128,7 @@ void	ft_flags_stock2_1(t_var *var, t_flags *s_flags, char *str_hexa)
 	var->i_moins = ft_stock_moins(var, str_hexa);
 	ft_stock_buf_base(var, s_flags, var->res_strcmp);
 	var->k = s_flags->precision - var->len_str_hexa + var->i_moins;
+	(var->k < 0) ? var->k = 0 : 0;
 	ft_memset(&var->buf_tmp[var->i_buf_tmp], '0', var->k);
 	var->i_buf_tmp += var->k;
 	ft_memcpy(&var->buf_tmp[var->i_buf_tmp], &str_hexa[var->i_moins],
