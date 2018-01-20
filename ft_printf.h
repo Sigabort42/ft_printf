@@ -6,7 +6,7 @@
 /*   By: elbenkri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/10 17:33:04 by elbenkri          #+#    #+#             */
-/*   Updated: 2018/01/12 03:16:25 by elbenkri         ###   ########.fr       */
+/*   Updated: 2018/01/20 14:45:24 by elbenkri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,9 +150,10 @@ void					ft_flags_stock2_4(t_var *var, t_flags *s_flags,
 void					ft_flags_stock2_5(t_var *var, t_flags *s_flags,
 											char *str_hexa);
 void					ft_verif_buf(t_var *var, const char *format);
-int					ft_verif_address(t_var *var);
-int					ft_verif_flags_stock2_4(t_flags *s_flags, t_var *var);
-void					ft_split2_2(t_flags *s_flags, t_var *var, char *str_hexa);
+int						ft_verif_address(t_var *var);
+int						ft_verif_flags_stock2_4(t_flags *s_flags, t_var *var);
+void					ft_split2_2(t_flags *s_flags, t_var *var,
+									char *str_hexa);
 void					ft_split2_5(t_flags *s_flags, t_var *var);
 
 #endif

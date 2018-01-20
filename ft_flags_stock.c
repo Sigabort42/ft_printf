@@ -6,7 +6,7 @@
 /*   By: elbenkri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/22 16:14:24 by elbenkri          #+#    #+#             */
-/*   Updated: 2018/01/18 15:24:55 by elbenkri         ###   ########.fr       */
+/*   Updated: 2018/01/20 15:41:04 by elbenkri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ static void	ft_flags_stock3(t_var *var, t_flags *s_flags, char *str_hexa)
 			return ;
 		}
 		ft_memcpy(&var->buf_tmp[var->i_buf_tmp], str_hexa,
-			var->i_buf_tmp += var->len_str_hexa);
+		var->i_buf_tmp += var->len_str_hexa);
 		ft_memcpy(&var->buf[var->i_buf], var->buf_tmp, var->i_buf_tmp);
 		var->i_buf += var->i_buf_tmp;
 	}

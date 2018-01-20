@@ -6,7 +6,7 @@
 /*   By: elbenkri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/22 16:14:24 by elbenkri          #+#    #+#             */
-/*   Updated: 2018/01/12 04:40:32 by elbenkri         ###   ########.fr       */
+/*   Updated: 2018/01/20 15:21:43 by elbenkri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,16 +63,16 @@ static void		ft_print_flags_buffer3(va_list ap, t_var *var, t_flags
 		var->res2 = ft_wstrlen(var->nb.chr);
 		var->res = ft_strnew(var->res2);
 	}
+	else if (var->type == TYPE_NON_CONNU)
+	{
+		var->res = &var->nb.c;
+		var->res[1] = 0;
+	}
 	else if (var->type == TYPE_WSTRING || (s_flags->m > 0 && s_flags->m <= 16))
 	{
 		var->nb.chr2 = (wchar_t*)va_arg(ap, unsigned int*);
 		if (var->nb.chr2)
 			ft_print_flags_buffer5(var, i);
-	}
-	else if (var->type == TYPE_NON_CONNU)
-	{
-		var->res = &var->nb.c;
-		var->res[1] = 0;
 	}
 	ft_print_flags_buffer4(var, s_flags, var->res2);
 }

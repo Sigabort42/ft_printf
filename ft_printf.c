@@ -6,7 +6,7 @@
 /*   By: elbenkri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/15 15:56:55 by elbenkri          #+#    #+#             */
-/*   Updated: 2018/01/12 04:59:48 by elbenkri         ###   ########.fr       */
+/*   Updated: 2018/01/20 15:16:32 by elbenkri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,26 +29,25 @@ static int			ft_color(const char *format, t_var *var)
 	const char		*reset_color = "\033[0m";
 	int				i;
 
-	i = 0;
+	i = -1;
 	if (ft_strnequ("{eoc}", &format[0], 5))
 	{
 		ft_memcpy(&var->buf[var->i_buf], reset_color,
-			  var->i_buf += ft_strlen(reset_color));
+			var->i_buf += ft_strlen(reset_color));
 		var->ret += 5;
 	}
 	if (ft_strstr(format, "{eoc}"))
 	{
-		while (g_color[i].color)
+		while (g_color[++i].color)
 		{
 			if (ft_strnequ(g_color[i].color, &format[0],
-				       ft_strlen(g_color[i].color)))
+						ft_strlen(g_color[i].color)))
 			{
 				ft_memcpy(&var->buf[var->i_buf], g_color[i].unicode,
-					  var->i_buf += ft_strlen(g_color[i].unicode));
+					var->i_buf += ft_strlen(g_color[i].unicode));
 				var->ret += ft_strlen(g_color[i].color);
 				return (0);
 			}
-			i++;
 		}
 	}
 	return (0);
